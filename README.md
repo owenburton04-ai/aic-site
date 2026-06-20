@@ -55,3 +55,4 @@ you commit the name to print/handles.**
 - **Copy:** all text is plain HTML — edit directly in the page files.
 - **Honesty guardrail:** the Research page intentionally claims no findings yet. Don't add
   fabricated stats or interviews — update it with real work once the founding cycle produces it.
+# parameter-collective-site
