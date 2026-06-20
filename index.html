@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Parameter Collective — The future of finance learns AI first</title>
+<meta name="description" content="An independent community of students headed into high finance, investigating how the industry really uses AI — what works, what's overhyped, and the real workflows behind it." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="stylesheet" href="styles.css" />
+<script src="intro.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Parameter Collective home">
+      <span class="mark" aria-hidden="true">[<span>P</span>]</span>
+      <span class="brand-name">Parameter Collective</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="research.html">Research</a>
+      <a class="nav-apply" href="apply.html">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-center">
+      <span class="hero-mark" aria-hidden="true">[<span>P</span>]</span>
+      <p class="eyebrow"><span class="dot"></span> Now recruiting · Founding cohort</p>
+      <h1 class="hero-title">Parameter&nbsp;Collective</h1>
+      <p class="hero-sub">The future of finance learns AI first.</p>
+      <p class="hero-lead">An independent community of students headed into high finance — studying how the industry really uses AI.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="apply.html">Apply to join <span>→</span></a>
+        <a class="link-arrow subtle" href="research.html">See our research <span>→</span></a>
+      </div>
+      <ul class="hero-themes">
+        <li>Efficient uses</li>
+        <li>Overhyped bets</li>
+        <li>Real workflows</li>
+      </ul>
+      <span class="clock" data-clock>—</span>
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="section tint">
+    <div class="wrap">
+      <p class="statement">Most coverage of AI in finance sells excitement. We do something rarer — we report what's <em>actually</em> being used inside venture capital, private equity, investment banking, and wealth management, and we say plainly where the hype runs ahead of reality.</p>
+    </div>
+  </section>
+
+  <!-- WHAT WE STUDY -->
+  <section class="section">
+    <div class="wrap">
+      <p class="section-kicker">What we study</p>
+      <ol class="pillars">
+        <li>
+          <span class="num">01</span>
+          <div>
+            <h3>Efficient uses</h3>
+            <p>Where AI genuinely creates an edge in research, diligence, and dealmaking — and how the best teams actually capture it.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div>
+            <h3>Overhyped bets</h3>
+            <p>Where money and attention are flowing into AI that doesn't hold up — the tools, claims, and workflows that underdeliver.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div>
+            <h3>Real workflows</h3>
+            <p>How investors and bankers use AI day to day in practice — the unglamorous, concrete adoption behind the headlines.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- WHO -->
+  <section class="section tint">
+    <div class="wrap who">
+      <div>
+        <p class="section-kicker">Who we're looking for</p>
+        <h2>Students who want the truth about AI before they enter the industry.</h2>
+      </div>
+      <ul class="checks">
+        <li>Undergraduates aiming for VC, PE, investment banking, or wealth management</li>
+        <li>Genuinely curious about how AI is changing the work — not just the hype</li>
+        <li>Willing to do real research: interviews, reading, and honest write-ups</li>
+        <li>Any year, any major. Drive matters more than a résumé line.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Help build the founding cohort.</h2>
+      <p>We're new — and that's the opportunity. Get in early, shape the research, and learn the tools reshaping finance before your peers do.</p>
+      <div class="actions">
+        <a class="btn btn-light" href="apply.html">Apply to join <span>→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="mark" aria-hidden="true">[<span>P</span>]</span>
+      Parameter Collective
+    </div>
+    <p class="footer-note">An independent, student-founded research community. Not affiliated with any university, employer, or fund.</p>
+    <div class="footer-meta">
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="apply.html">Apply</a>
+      </nav>
+      <span class="clock" data-clock>—</span>
+      <span>© 2026 Parameter Collective</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Subtle live clock (Mountain Time) — edit timeZone/label below if you relocate.
+  (function () {
+    function tick() {
+      try {
+        var fmt = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'America/Denver', weekday: 'short', month: 'short',
+          day: 'numeric', hour: 'numeric', minute: '2-digit'
+        });
+        var s = fmt.format(new Date()) + ' MT';
+        document.querySelectorAll('[data-clock]').forEach(function (el) { el.textContent = s; });
+      } catch (e) {}
+    }
+    tick();
+    setInterval(tick, 30000);
+  })();
+</script>
+</body>
+</html>

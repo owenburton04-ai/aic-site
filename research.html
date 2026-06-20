@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Research — Parameter Collective</title>
+<meta name="description" content="Parameter Collective's founding research cycle is underway. First findings on how AI is really used across finance are publishing soon." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="stylesheet" href="styles.css" />
+<script src="intro.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Parameter Collective home">
+      <span class="mark" aria-hidden="true">[<span>P</span>]</span>
+      <span class="brand-name">Parameter Collective</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a class="nav-apply" href="apply.html">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow"><span class="dot"></span> Coming soon · Founding cycle</p>
+      <h1 class="hero-title">Research</h1>
+      <p class="hero-lead">Our founding research cycle is underway. The first findings — on how AI is genuinely used across venture capital, private equity, investment banking, and wealth management — will publish here.</p>
+    </div>
+  </section>
+
+  <!-- HONEST NOTE -->
+  <section class="section tint">
+    <div class="wrap">
+      <p class="statement">We won't publish until we have something real to say. No borrowed statistics, no recycled hype — just first-hand research from conversations with people doing the work. <em>That takes a little time, and it's worth the wait.</em></p>
+    </div>
+  </section>
+
+  <!-- AGENDA -->
+  <section class="section">
+    <div class="wrap">
+      <p class="section-kicker">The research agenda</p>
+      <ol class="pillars">
+        <li>
+          <span class="num">01</span>
+          <div>
+            <h3>Efficient uses</h3>
+            <p>Where AI genuinely creates an edge in research, diligence, and dealmaking — and how the best teams actually capture it.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div>
+            <h3>Overhyped bets</h3>
+            <p>Where money and attention are flowing into AI that doesn't hold up — the tools, claims, and workflows that underdeliver.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div>
+            <h3>Real workflows</h3>
+            <p>How investors and bankers use AI day to day in practice — the unglamorous, concrete adoption behind the headlines.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Want to help shape it?</h2>
+      <p>The founding cohort decides what we study first. Apply to be part of the research from day one.</p>
+      <div class="actions">
+        <a class="btn btn-light" href="apply.html">Apply to join <span>→</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="mark" aria-hidden="true">[<span>P</span>]</span>
+      Parameter Collective
+    </div>
+    <p class="footer-note">An independent, student-founded research community. Not affiliated with any university, employer, or fund.</p>
+    <div class="footer-meta">
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="apply.html">Apply</a>
+      </nav>
+      <span class="clock" data-clock>—</span>
+      <span>© 2026 Parameter Collective</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    function tick() {
+      try {
+        var fmt = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'America/Denver', weekday: 'short', month: 'short',
+          day: 'numeric', hour: 'numeric', minute: '2-digit'
+        });
+        var s = fmt.format(new Date()) + ' MT';
+        document.querySelectorAll('[data-clock]').forEach(function (el) { el.textContent = s; });
+      } catch (e) {}
+    }
+    tick();
+    setInterval(tick, 30000);
+  })();
+</script>
+</body>
+</html>

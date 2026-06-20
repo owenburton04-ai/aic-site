@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apply — Parameter Collective</title>
+<meta name="description" content="Apply to the founding cohort of Parameter Collective — an independent student research community on AI in finance." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="stylesheet" href="styles.css" />
+<script src="intro.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Parameter Collective home">
+      <span class="mark" aria-hidden="true">[<span>P</span>]</span>
+      <span class="brand-name">Parameter Collective</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a class="nav-apply" href="apply.html" aria-current="page">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow"><span class="dot"></span> Founding cohort · 2026</p>
+      <h1 class="hero-title">Apply</h1>
+      <p class="hero-lead">A few honest questions. We read every application personally — there are no wrong answers, and you don't need finance experience yet.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="wrap form-wrap">
+      <!--
+        APPLICATION FORM
+        Default wiring: Netlify Forms (works automatically when deployed to Netlify —
+        submissions appear in your Netlify dashboard under Forms, with optional email
+        notifications). No third-party account needed.
+
+        If you deploy somewhere OTHER than Netlify (e.g. Vercel):
+          1) delete the data-netlify / netlify-honeypot attrs and the hidden "form-name" input
+          2) sign up at formspree.io, create a form, and set:
+             action="https://formspree.io/f/YOUR_FORM_ID" method="POST"
+        Everything else (fields, styling) stays the same.
+      -->
+      <form name="application" method="POST"
+            action="thanks.html"
+            data-netlify="true" netlify-honeypot="bot-field"
+            enctype="multipart/form-data">
+        <input type="hidden" name="form-name" value="application" />
+        <p hidden><label>Skip this field: <input name="bot-field" /></label></p>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Full name <span class="req">*</span></label>
+            <input class="input" id="name" name="name" type="text" required placeholder="Jordan Lee" />
+          </div>
+          <div class="field">
+            <label for="email">Email <span class="req">*</span></label>
+            <input class="input" id="email" name="email" type="email" required placeholder="you@school.edu" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="school">School / University <span class="req">*</span></label>
+            <input class="input" id="school" name="school" type="text" required placeholder="e.g. University of —" />
+          </div>
+          <div class="field">
+            <label for="year">Year <span class="req">*</span></label>
+            <select id="year" name="year" required>
+              <option value="" disabled selected>Select…</option>
+              <option>Freshman</option>
+              <option>Sophomore</option>
+              <option>Junior</option>
+              <option>Senior</option>
+              <option>Graduate</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="track">Where are you headed in finance? <span class="req">*</span></label>
+          <select id="track" name="target_track" required>
+            <option value="" disabled selected>Select…</option>
+            <option>Venture Capital</option>
+            <option>Private Equity</option>
+            <option>Investment Banking</option>
+            <option>Wealth / Asset Management</option>
+            <option>Still exploring</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="linkedin">LinkedIn <span class="hint">optional</span></label>
+          <input class="input" id="linkedin" name="linkedin" type="url" placeholder="https://linkedin.com/in/…" />
+        </div>
+
+        <div class="field">
+          <label for="why">Why do you want to join? <span class="req">*</span></label>
+          <textarea id="why" name="why_join" required placeholder="What draws you to AI and finance? A few sentences is plenty."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="ai">What's your interest or experience with AI? <span class="hint">optional</span></label>
+          <textarea id="ai" name="ai_experience" placeholder="Tools you've used, things you've read, or just what you're curious about. No experience required."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="resume">Résumé <span class="hint">optional · PDF</span></label>
+          <input id="resume" name="resume" type="file" accept=".pdf,.doc,.docx" />
+        </div>
+
+        <div class="form-submit">
+          <button class="btn btn-primary" type="submit">Submit application <span>→</span></button>
+          <p class="form-fine">By applying you agree to be contacted about Parameter Collective. We don't share your information.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="mark" aria-hidden="true">[<span>P</span>]</span>
+      Parameter Collective
+    </div>
+    <p class="footer-note">An independent, student-founded research community. Not affiliated with any university, employer, or fund.</p>
+    <div class="footer-meta">
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="apply.html">Apply</a>
+      </nav>
+      <span class="clock" data-clock>—</span>
+      <span>© 2026 Parameter Collective</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    function tick() {
+      try {
+        var fmt = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'America/Denver', weekday: 'short', month: 'short',
+          day: 'numeric', hour: 'numeric', minute: '2-digit'
+        });
+        var s = fmt.format(new Date()) + ' MT';
+        document.querySelectorAll('[data-clock]').forEach(function (el) { el.textContent = s; });
+      } catch (e) {}
+    }
+    tick();
+    setInterval(tick, 30000);
+  })();
+</script>
+</body>
+</html>
