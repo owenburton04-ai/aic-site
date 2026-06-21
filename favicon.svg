@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="216pt" height="216pt" viewBox="0 0 216 216" xmlns="http://www.w3.org/2000/svg" version="1.1">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="155.52pt" height="155.52pt" viewBox="0 0 155.52 155.52" xmlns="http://www.w3.org/2000/svg" version="1.1">
  <metadata>
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-06-20T00:49:41.255071</dc:date>
+    <dc:date>2026-06-20T23:55:58.527477</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -21,18 +21,17 @@
  </defs>
  <g id="figure_1">
   <g id="patch_1">
-   <path d="M 0 216 
-L 216 216 
-L 216 0 
+   <path d="M 0 155.52 
+L 155.52 155.52 
+L 155.52 0 
 L 0 0 
-L 0 216 
 z
-" style="fill: none"/>
+" style="fill: #ffffff"/>
   </g>
   <g id="axes_1">
    <g id="text_1">
     <!-- [ -->
-    <g style="fill: #1e2a33" transform="translate(26.314687 146.25) scale(1.5 -1.5)">
+    <g style="fill: #1e2a33" transform="translate(30.2334 102.24) scale(0.96 -0.96)">
      <defs>
       <path id="SpaceGrotesk-Light-5b" d="M 998 -1472 
 Q 806 -1472 684 -1344 
@@ -56,41 +55,41 @@ z
     </g>
    </g>
    <g id="text_2">
-    <!-- P -->
-    <g style="fill: #5c9ce0" transform="translate(78 133) scale(1 -1)">
+    <!-- AI -->
+    <g style="fill: #5c9ce0" transform="translate(52.706719 92.26) scale(0.58 -0.58)">
      <defs>
-      <path id="SpaceGrotesk-Light-50" d="M 550 0 
+      <path id="SpaceGrotesk-Light-41" d="M 179 0 
+L 1645 4480 
+L 2374 4480 
+L 3840 0 
+L 3411 0 
+L 3027 1190 
+L 992 1190 
+L 608 0 
+L 179 0 
+z
+M 1107 1562 
+L 2912 1562 
+L 2048 4237 
+L 1971 4237 
+L 1107 1562 
+z
+" transform="scale(0.015625)"/>
+      <path id="SpaceGrotesk-Light-49" d="M 550 0 
 L 550 4480 
-L 2208 4480 
-Q 2605 4480 2921 4329 
-Q 3238 4179 3424 3897 
-Q 3610 3616 3610 3213 
-L 3610 3136 
-Q 3610 2733 3421 2448 
-Q 3232 2163 2915 2016 
-Q 2598 1869 2208 1869 
-L 960 1869 
+L 960 4480 
 L 960 0 
 L 550 0 
 z
-M 960 2240 
-L 2163 2240 
-Q 2643 2240 2921 2477 
-Q 3200 2714 3200 3142 
-L 3200 3206 
-Q 3200 3642 2928 3875 
-Q 2656 4109 2163 4109 
-L 960 4109 
-L 960 2240 
-z
 " transform="scale(0.015625)"/>
      </defs>
-     <use xlink:href="#SpaceGrotesk-Light-50"/>
+     <use xlink:href="#SpaceGrotesk-Light-41"/>
+     <use xlink:href="#SpaceGrotesk-Light-49" transform="translate(62.799988 0)"/>
     </g>
    </g>
    <g id="text_3">
     <!-- ] -->
-    <g style="fill: #1e2a33" transform="translate(140.794688 146.25) scale(1.5 -1.5)">
+    <g style="fill: #1e2a33" transform="translate(93.9966 102.24) scale(0.96 -0.96)">
      <defs>
       <path id="SpaceGrotesk-Light-5d" d="M 128 -1472 
 L 128 -1139 

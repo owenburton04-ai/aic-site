@@ -1,0 +1,75 @@
+# Decap CMS configuration — Applied Intelligence Collective
+# Edit content at /admin/ once the site is on Netlify with Identity + Git Gateway enabled.
+# (Setup steps are in the Deploy guide. Until then this scaffold is inert — safe to commit.)
+
+backend:
+  name: git-gateway          # Netlify Git Gateway (enable in Netlify → Identity → Services)
+  branch: main               # branch the CMS commits to
+
+# Where uploaded images are stored / served from
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+# Friendly preview links (update host once the real Netlify/domain URL is known)
+site_url: https://applied-intelligence-collective.netlify.app
+display_url: https://applied-intelligence-collective.netlify.app
+
+collections:
+  - name: "briefs"
+    label: "Research Briefs"
+    label_singular: "Research Brief"
+    description: "The weekly ~300-word briefs from each track."
+    folder: "content/briefs"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}}  ·  {{track}}"
+    sortable_fields: ["date", "track", "title"]
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - label: "Track"
+        name: "track"
+        widget: "select"
+        options:
+          - "Deal sourcing & origination"
+          - "Due diligence & document review"
+          - "Financial modeling & analysis"
+          - "Investment & market research"
+          - "Memo, CIM & pitch generation"
+          - "Wealth management & client work"
+          - "Risk, compliance & back office"
+          - "The tooling map"
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - label: "Verdict"
+        name: "verdict"
+        widget: "select"
+        hint: "Lead with the honest call — this is the house POV."
+        options: ["Working", "Overhyped", "Mixed", "Too early to tell"]
+      - { label: "Summary (~300 words)", name: "summary", widget: "text" }
+      - { label: "Sources / who you spoke to", name: "sources", widget: "text", required: false, hint: "Cite real sources. Never fabricate interviews or stats." }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
+
+  - name: "articles"
+    label: "Articles"
+    label_singular: "Article"
+    folder: "content/articles"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Summary", name: "summary", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "newsletter"
+    label: "Newsletter Issues"
+    label_singular: "Issue"
+    folder: "content/newsletter"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Issue title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Intro", name: "intro", widget: "text" }
+      - { label: "Body", name: "body", widget: "markdown" }

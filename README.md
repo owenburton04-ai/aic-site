@@ -1,58 +1,64 @@
-# Parameter Collective — website
+# Applied Intelligence Collective — website
 
 A self-contained static site. No build step, no framework, no dependencies to install.
-Just HTML + CSS (fonts load from Google Fonts; one tiny inline script powers the clock).
+HTML + CSS (fonts load from Google Fonts; one tiny inline script powers the clock).
 
 ```
 Website/
-  index.html      Home
-  research.html   Research (coming soon)
-  apply.html      Application (native form)
-  thanks.html     Post-submit confirmation
-  styles.css      All styling (brand tokens at the top)
+  index.html            Home (editorial split hero)
+  research.html         Research — the 3 lenses + 8 tracks
+  apply.html            Application (native form + program-overview link)
+  thanks.html           Post-submit confirmation
+  program-overview.pdf  The internship program deck (linked from home + apply)
+  favicon.svg           The [ AI ] mark
+  styles.css            All styling (brand tokens at the top)
+  intro.js              One-time opening animation (per browser session)
+  admin/                Decap CMS — /admin (config.yml + index.html)
+  content/              CMS content: briefs / articles / newsletter (markdown)
+  images/uploads/       CMS media uploads
 ```
 
-Brand: Palette B "Sky & Graphite" · Space Grotesk (headings) / Inter (body) · the [P] mark,
-rendered as live text so it stays razor-sharp at any size.
+Brand: Palette B "Sky & Graphite" · Space Grotesk (headings) / Inter (body) · the [ AI ] mark,
+rendered as live text so it stays sharp at any size.
 
 ---
 
 ## 1. Preview locally
-Open `index.html` in a browser, or run a tiny local server from this folder:
+Open `index.html`, or run a tiny server from this folder:
 ```
-python3 -m http.server 8000
+python3 -m http.server 8000   # then visit http://localhost:8000
 ```
-then visit http://localhost:8000
 
-## 2. Deploy (recommended: Netlify — free, drag-and-drop, forms built in)
-1. Go to https://app.netlify.com/drop
-2. Drag the **Website** folder onto the page. It's live in seconds on a `*.netlify.app` URL.
-3. To update later, drag the folder again (or connect a GitHub repo for auto-deploys).
+## 2. Deploy
+**Netlify** (recommended — hosting + forms + CMS in one). Full steps in `DEPLOY.md`.
+Quick path: drag this `Website/` folder onto https://app.netlify.com/drop, or connect the
+`aic-site` GitHub repo for auto-deploys.
 
 ## 3. The application form
-The form is pre-wired for **Netlify Forms**, so once deployed to Netlify it works with zero setup:
-- Submissions appear in your Netlify dashboard → **Forms** → `application`.
-- Turn on email alerts: Site settings → Forms → **Form notifications** → add your email.
-- File uploads (résumés) are supported and stored with each submission.
+Pre-wired for **Netlify Forms** — works with zero setup once on Netlify:
+- Submissions: Netlify dashboard → **Forms → `application`**.
+- Email alerts: Site configuration → Forms → **Form notifications**.
+- Résumé file uploads are supported.
 
-**Deploying somewhere other than Netlify (e.g. Vercel)?** Netlify Forms won't work there.
-Switch to Formspree (free tier) — see the comment block at the top of the form in `apply.html`:
-delete the three Netlify attributes + the hidden `form-name` input, then set
-`action="https://formspree.io/f/YOUR_FORM_ID"`.
+Not on Netlify (e.g. Vercel)? Switch to Formspree — see the comment at the top of the form
+in `apply.html` (delete the Netlify attrs + hidden `form-name`, set `action` to your Formspree URL).
 
-## 4. Custom domain
-After deploying, add your domain in Netlify → Domain settings. Buy the domain first
-(Namecheap/Cloudflare ~$10–12/yr). **Verify `parametercollective.com` is available before
-you commit the name to print/handles.**
+## 4. Content / CMS (Decap)
+The `/admin/` route is a **Decap CMS** scaffold. Turn it on after deploying: enable Netlify
+**Identity** + **Git Gateway**, invite yourself, then edit at `your-site/admin/`. See `DEPLOY.md`
+Part D. Collections: Research Briefs, Articles, Newsletter. The CMS commits markdown into
+`content/`; rendering that content onto the public pages is a planned next step.
+
+## 5. Custom domain
+Netlify → Domain settings. Buy the domain first (Namecheap/Cloudflare). **Confirm
+`appliedintelligencecollective.com` (or your pick) is available before committing it to print.**
 
 ---
 
 ## Editing notes
 - **Brand colors / fonts:** the `:root` block at the top of `styles.css`.
-- **The live clock** (bottom of each page, in the hero on home): set for Mountain Time
-  (`America/Denver`). To change, edit `timeZone` and the `' MT'` label in the `<script>`
-  at the bottom of each HTML file.
-- **Copy:** all text is plain HTML — edit directly in the page files.
+- **The live clock:** set to Mountain Time (`America/Denver`) — edit `timeZone` / the `' MT'`
+  label in the `<script>` at the bottom of each HTML file.
+- **Copy:** plain HTML — edit directly in the page files.
 - **Honesty guardrail:** the Research page intentionally claims no findings yet. Don't add
-  fabricated stats or interviews — update it with real work once the founding cycle produces it.
-# parameter-collective-site
+  fabricated stats or interviews — publish real work once the founding cycle produces it.

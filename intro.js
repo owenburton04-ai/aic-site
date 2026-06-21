@@ -1,26 +1,18 @@
-/* Full-screen opening intro for Parameter Collective.
-   Plays on a fresh open or a refresh — NOT when navigating between pages via the nav links.
-   The brackets fly in to snap around the P, hold briefly, then the whole screen fades +
-   zooms away to reveal the site. */
+/* Opening intro for Applied Intelligence Collective.
+   Plays ONCE per browser-tab session — never on internal navigation (Home/Research/Apply)
+   or refresh. The [ AI ] mark settles in, holds, then the whole panel dissolves
+   (gentle zoom-through + soft blur + fade) to reveal the site. */
 (function () {
   try {
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   } catch (e) {}
 
-  // Play ONLY on a fresh open or a refresh — not on internal navigation.
-  // An internal link click arrives as a "navigate" with a same-origin referrer; a refresh is
-  // "reload"; a fresh open (typed URL / bookmark / external link) has no same-origin referrer.
-  var play = true;
+  // Once per tab session. Clicking between pages or refreshing won't replay it;
+  // a brand-new visit (new tab / reopened browser) plays it again.
   try {
-    var entries = performance.getEntriesByType('navigation');
-    var navType = (entries && entries.length) ? entries[0].type
-      : (performance.navigation && performance.navigation.type === 1 ? 'reload' : 'navigate');
-    var sameOriginRef = document.referrer && document.referrer.indexOf(location.origin) === 0;
-    if (navType === 'reload') play = true;
-    else if (navType === 'navigate' && !sameOriginRef) play = true;
-    else play = false; // internal link click, back/forward, etc.
-  } catch (e) { play = true; }
-  if (!play) return;
+    if (sessionStorage.getItem('aic_intro_played')) return;
+    sessionStorage.setItem('aic_intro_played', '1');
+  } catch (e) { /* storage blocked (private mode etc.) — fall through and play once */ }
 
   var o = document.createElement('div');
   o.className = 'pc-intro';
@@ -30,9 +22,9 @@
   o.innerHTML =
     '<div class="pc-intro-inner">' +
       '<div class="pc-intro-mark">' +
-        '<span class="br-l">[</span><span class="p">P</span><span class="br-r">]</span>' +
+        '<span class="br-l">[</span><span class="p">AI</span><span class="br-r">]</span>' +
       '</div>' +
-      '<div class="pc-intro-name"><span>Parameter Collective</span></div>' +
+      '<div class="pc-intro-name"><span>Applied Intelligence Collective</span></div>' +
       '<div class="pc-intro-line"></div>' +
     '</div>';
 
@@ -40,12 +32,12 @@
   root.appendChild(o);
   root.style.overflow = 'hidden'; // briefly lock scroll during the intro
 
-  var HOLD = 1150;  // ms shown after the mark settles, before it leaves
-  var WIPE = 820;   // ms the layered exit takes (content lift + curtain up)
+  var HOLD = 1000;  // ms the mark holds after settling, before it leaves
+  var EXIT = 780;   // ms the dissolve takes
 
   setTimeout(function () { o.classList.add('pc-leaving'); }, HOLD);
   setTimeout(function () {
     if (o.parentNode) o.parentNode.removeChild(o);
     root.style.overflow = '';
-  }, HOLD + WIPE);
+  }, HOLD + EXIT);
 })();
