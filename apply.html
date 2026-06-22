@@ -105,6 +105,9 @@
             <option>Still exploring</option>
             <option>Other</option>
           </select>
+          <input class="input" id="track-other" name="target_track_other" type="text"
+                 aria-label="Tell us where you're headed" placeholder="Tell us where —"
+                 style="display:none;margin-top:12px" />
         </div>
 
         <div class="field">
@@ -154,6 +157,23 @@
     </div>
   </div>
 </footer>
+
+<script>
+  // Reveal a text box when "Other" is chosen for the finance-direction question.
+  (function () {
+    var sel = document.getElementById('track');
+    var other = document.getElementById('track-other');
+    if (!sel || !other) return;
+    function sync() {
+      var isOther = sel.value === 'Other';
+      other.style.display = isOther ? 'block' : 'none';
+      if (isOther) { other.setAttribute('required', ''); }
+      else { other.removeAttribute('required'); other.value = ''; }
+    }
+    sel.addEventListener('change', sync);
+    sync();
+  })();
+</script>
 
 <script>
   (function () {
