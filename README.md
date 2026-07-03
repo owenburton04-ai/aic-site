@@ -6,7 +6,7 @@ HTML + CSS (fonts load from Google Fonts; one tiny inline script powers the cloc
 ```
 Website/
   index.html            Home (editorial split hero)
-  research.html         Research — the 3 lenses + 8 directions
+  research.html         Research — the 3 lenses + open research (self-scoped questions)
   apply.html            Application (native form + program-overview link)
   thanks.html           Post-submit confirmation
   program-overview.pdf  The internship program deck (linked from home + apply)
