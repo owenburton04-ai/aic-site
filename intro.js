@@ -7,12 +7,24 @@
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   } catch (e) {}
 
-  // Once per tab session. Clicking between pages or refreshing won't replay it;
-  // a brand-new visit (new tab / reopened browser) plays it again.
+  // Skip on internal navigation. If you got here by clicking a link from another
+  // page on this same site (Home/Research/About/Apply), the intro already played
+  // this visit, so don't replay it. This check works even when storage is blocked
+  // (e.g. Safari Private Browsing), which is the reliable signal.
+  try {
+    if (document.referrer) {
+      var ref = new URL(document.referrer);
+      if (ref.origin === window.location.origin) return;
+    }
+  } catch (e) {}
+
+  // Fresh entry to the site. Still gate with sessionStorage as a backup so a
+  // refresh of the landing page doesn't replay it. Best-effort: if storage is
+  // blocked this simply no-ops, and the referrer check above does the real work.
   try {
     if (sessionStorage.getItem('aic_intro_played')) return;
     sessionStorage.setItem('aic_intro_played', '1');
-  } catch (e) { /* storage blocked (private mode etc.) — fall through and play once */ }
+  } catch (e) { /* storage blocked (private mode etc.) — rely on the referrer check */ }
 
   var o = document.createElement('div');
   o.className = 'pc-intro';
