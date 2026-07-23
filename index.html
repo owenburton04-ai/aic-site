@@ -9,8 +9,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim')}catch(e){}</script>
 <link rel="stylesheet" href="styles.css" />
 <script src="intro.js"></script>
+<script defer src="reveal.js"></script>
 </head>
 <body>
 
@@ -64,6 +66,9 @@
       <!-- the journey: ocean, up over the mountains, to the moon -->
       <path class="hs-trail" d="M360,600 C430,560 445,538 485,518 C565,483 585,428 645,358 C712,268 820,198 900,160 C925,148 945,150 958,150"
             stroke="#5C9CE0" stroke-width="2.25" stroke-dasharray="1 10" opacity=".85"/>
+      <!-- the spark where the journey begins -->
+      <circle class="hs-spark-ring" cx="360" cy="600" r="5" stroke="#5C9CE0" stroke-width="1.5"/>
+      <circle class="hs-spark-core" cx="360" cy="600" r="5" fill="#5C9CE0"/>
     </svg>
     <div class="wrap">
       <div class="hero-home-inner">
@@ -188,7 +193,7 @@
       </div>
       <ul class="checks">
         <li>Fully remote, eight weeks, about eight hours a week</li>
-        <li>Your own research question inside one of four finance areas</li>
+        <li>Your own research question in your corner of finance</li>
         <li>Published briefs and a capstone with your name on them</li>
         <li>Top researchers can be staffed on real client work</li>
       </ul>

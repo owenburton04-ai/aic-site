@@ -71,6 +71,11 @@
         /* the journey: ocean, up over the mountains, to the moon */
         '<path class="ptrail" d="M360,600 C430,560 445,538 485,518 C565,483 585,428 645,358 C712,268 820,198 900,160 C925,148 945,150 958,150"' +
           ' stroke="#5C9CE0" stroke-width="2.25" stroke-dasharray="1 10"/>' +
+        /* the spark where the journey begins (fades in with the trail, then pulses) */
+        '<g class="pfade">' +
+          '<circle class="hs-spark-ring" cx="360" cy="600" r="5" stroke="#5C9CE0" stroke-width="1.5"/>' +
+          '<circle class="hs-spark-core" cx="360" cy="600" r="5" fill="#5C9CE0"/>' +
+        '</g>' +
       '</svg>' +
     '</div>';
 

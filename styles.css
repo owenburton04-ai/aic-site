@@ -491,8 +491,17 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
   0%,100%{transform:translate(0,0)}
   50%{transform:translate(-9px,-5px)}
 }
+/* the spark at the trailhead — a pulsing beacon with an expanding ripple.
+   Global (used in the home hero and the intro scene). */
+.hs-spark-core,.hs-spark-ring{transform-box:fill-box;transform-origin:center}
+.hs-spark-core{animation:hsSparkCore 2.4s ease-in-out infinite}
+.hs-spark-ring{animation:hsSparkRing 2.4s ease-out infinite}
+@keyframes hsSparkCore{0%,100%{opacity:.55;transform:scale(.8)}50%{opacity:1;transform:scale(1.1)}}
+@keyframes hsSparkRing{0%{opacity:.7;transform:scale(1)}70%,100%{opacity:0;transform:scale(3.4)}}
 @media (prefers-reduced-motion:reduce){
-  .hero-scene .hs-trail,.hero-scene .hs-bird{animation:none}
+  .hero-scene .hs-trail,.hero-scene .hs-bird,
+  .hs-spark-core,.hs-spark-ring{animation:none}
+  .hs-spark-ring{opacity:0}
 }
 .hero-home-inner{display:flex;flex-direction:column;align-items:center;max-width:840px;margin:0 auto}
 .hero-home .eyebrow{margin-bottom:26px}
@@ -531,6 +540,52 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
 .reader-detail .card-body{font-size:15.5px;margin-top:10px}
 .reader-detail .card-meta{margin-top:2px}
 .reader-detail .card-sources{margin-top:14px}
+
+/* ---------- scroll reveal + card polish ---------- */
+/* Progressive: the hidden state is gated on html.anim, which reveal.js's inline
+   head marker sets synchronously (and never sets under prefers-reduced-motion),
+   so no-JS / reduced-motion visitors see everything normally with no flash. */
+
+/* cards carry their own transition so the hover lift and the reveal share it */
+.path-card,.feature-card,.stat-card,.price-card,.paper-card{
+  transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease,
+             border-color .15s ease,opacity .5s ease;
+}
+.path-card:hover,.feature-card:hover,.stat-card:hover,.price-card:hover,.paper-card:hover{
+  transform:translateY(-5px);box-shadow:0 12px 30px rgba(30,42,51,.09);
+}
+
+/* reveal — cards (transition inherited from the rule above) */
+html.anim .path-card,
+html.anim .feature-card,
+html.anim .stat-card,
+html.anim .price-card,
+html.anim .paper-card{opacity:0;transform:translateY(18px)}
+
+/* reveal — text / list / block elements */
+html.anim .section-kicker,
+html.anim .tracks-head,
+html.anim .tracks-lead,
+html.anim .statement,
+html.anim .who h2,
+html.anim .founders-figure,
+html.anim .founders-intro h2,
+html.anim .founders-intro p,
+html.anim .brief-card,
+html.anim .step,
+html.anim .lens-strip li,
+html.anim .checks li,
+html.anim .callout,
+html.anim .reader{
+  opacity:0;transform:translateY(18px);
+  transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);
+}
+html.anim .rv-in{opacity:1;transform:none}
+
+/* numbered-step connector line draws in as the step reveals */
+html.anim .step::after{transform:scaleX(0);transform-origin:left;
+  transition:transform .55s cubic-bezier(.2,.7,.2,1) .15s}
+html.anim .step.rv-in::after{transform:scaleX(1)}
 
 /* ---------- responsive ---------- */
 @media (max-width:960px){
