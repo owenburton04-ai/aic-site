@@ -175,6 +175,7 @@
       detailEl.style.opacity = "0";
       setTimeout(function () {
         detailEl.innerHTML = detailHTML(briefs[i]);
+        detailEl.scrollTop = 0;               // start each brief at the top of the pane
         detailEl.style.opacity = "1";
         if (scroll && window.matchMedia("(max-width:760px)").matches) {
           detailEl.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -193,6 +194,7 @@
           '</button>';
       });
       listEl.innerHTML = html;
+      listEl.scrollTop = 0;                    // back to the top when the track changes
       Array.prototype.forEach.call(listEl.querySelectorAll(".reader-item"), function (el) {
         el.addEventListener("click", function () { selectIndex(+el.dataset.index, true); });
       });

@@ -558,8 +558,12 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
 .reader-detail{
   background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 30px;
   position:sticky;top:90px;transition:opacity .2s ease;
-  max-height:70vh;overflow-y:auto;
+  max-height:70vh;overflow-y:auto;scroll-behavior:smooth;
+  scrollbar-width:thin;scrollbar-color:var(--line) transparent;
 }
+.reader-detail::-webkit-scrollbar{width:8px}
+.reader-detail::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+.reader-detail::-webkit-scrollbar-thumb:hover{background:var(--faint)}
 .reader-detail h3{font-size:24px;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:4px 0 2px}
 .reader-detail .card-body{font-size:15.5px;margin-top:10px}
 .reader-detail .card-meta{margin-top:2px}
