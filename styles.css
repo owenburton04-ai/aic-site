@@ -427,6 +427,14 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
   letter-spacing:-.02em;color:var(--graphite);padding-bottom:16px;
   border-bottom:1px solid var(--line);margin-bottom:16px}
 .price-desc{color:var(--muted);font-size:14px;line-height:1.55}
+/* the $500 Starter tier is a live CTA (starts the founding pilot) */
+.price-cta{cursor:pointer}
+.price-cta .price-desc{flex:1}
+.price-tag-sky{background:var(--sky);color:#fff}
+.price-card-go{margin-top:16px;font-size:14px}
+.price-cta:hover{border-color:var(--sky)}
+.price-cta:hover .price-card-go{color:var(--sky-dark)}
+.price-cta:hover .price-card-go span{transform:translateX(4px)}
 
 /* numbered step / timeline row */
 .steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
