@@ -4,3 +4,6 @@
 # editor
 .vscode/
 *.swp
+
+# local dev tooling (never publish to the live static site)
+.claude/
