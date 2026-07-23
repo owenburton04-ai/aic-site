@@ -430,6 +430,7 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
 
 /* numbered step / timeline row */
 .steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
+.steps.cols-4{grid-template-columns:repeat(4,1fr)}
 .step{position:relative;padding-top:56px}
 .step::after{
   content:"";position:absolute;top:18px;left:48px;width:calc(100% - 48px + 28px);
@@ -487,7 +488,7 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
   .feature-grid.cols-2,.feature-grid.cols-3{grid-template-columns:1fr}
   .stat-grid{grid-template-columns:1fr}
   .price-grid{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr;gap:22px}
+  .steps,.steps.cols-4{grid-template-columns:1fr;gap:22px}
   .step{padding-top:0;padding-left:52px;min-height:38px}
   .step::after{display:none}
   .path-grid{grid-template-columns:1fr}
