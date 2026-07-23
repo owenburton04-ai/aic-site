@@ -60,8 +60,12 @@
     <div class="wrap">
       <p class="section-kicker">Weekly research briefs</p>
       <h2 class="tracks-head">The cohort's briefs, posted here each week.</h2>
-      <p class="tracks-lead muted">Every member writes a ~300-word brief weekly, each leading with the honest takeaway. Below is the founding cohort's first week of published findings, across all four research tracks.</p>
-      <div id="briefs-grid" class="card-grid" aria-live="polite"></div>
+      <p class="tracks-lead muted">Every member writes a ~300-word brief weekly, each leading with the honest takeaway. Filter by track on the left, and read any brief in full on the right.</p>
+      <div class="brief-filters" id="brief-filters" aria-label="Filter briefs by track"></div>
+      <div class="reader" id="brief-reader">
+        <div class="reader-list" id="brief-list"></div>
+        <div class="reader-detail" id="brief-detail" aria-live="polite"></div>
+      </div>
     </div>
   </section>
 
@@ -145,16 +149,87 @@
       if (isNaN(dt)) return esc(d);
       return dt.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
     }
-    function renderBrief(b) {
-      return '<article class="brief-card">' +
-        '<div class="card-top"><span class="takeaway-tag">' + esc(b.takeaway || "") + '</span>' +
+
+    /* ---------- weekly briefs: filter + list + reading pane ---------- */
+    var briefs = (window.AIC_BRIEFS || []).slice();
+    var listEl = document.getElementById("brief-list");
+    var detailEl = document.getElementById("brief-detail");
+    var filtersEl = document.getElementById("brief-filters");
+    var activeFilter = "All";
+
+    function detailHTML(b) {
+      return '<div class="card-top"><span class="takeaway-tag">' + esc(b.takeaway || "") + '</span>' +
         '<span class="card-date">' + fmtDate(b.date) + '</span></div>' +
         '<h3>' + esc(b.title) + '</h3>' +
         '<p class="card-meta">' + esc(b.author) + (b.group ? " · " + esc(b.group) : "") + '</p>' +
         '<p class="card-body">' + esc(b.summary) + '</p>' +
-        (b.sourcesNote ? '<p class="card-sources">' + esc(b.sourcesNote) + '</p>' : '') +
-        '</article>';
+        (b.sourcesNote ? '<p class="card-sources">' + esc(b.sourcesNote) + '</p>' : '');
     }
+
+    function selectIndex(i, scroll) {
+      Array.prototype.forEach.call(listEl.querySelectorAll(".reader-item"), function (el) {
+        el.classList.toggle("active", +el.dataset.index === i);
+      });
+      detailEl.style.opacity = "0";
+      setTimeout(function () {
+        detailEl.innerHTML = detailHTML(briefs[i]);
+        detailEl.style.opacity = "1";
+        if (scroll && window.matchMedia("(max-width:760px)").matches) {
+          detailEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 120);
+    }
+
+    function renderList() {
+      var html = "";
+      briefs.forEach(function (b, i) {
+        if (activeFilter !== "All" && b.group !== activeFilter) return;
+        html += '<button type="button" class="reader-item" data-index="' + i + '">' +
+          '<span class="takeaway-tag ri-tag">' + esc(b.takeaway || "") + '</span>' +
+          '<span class="ri-title">' + esc(b.title) + '</span>' +
+          '<span class="ri-meta">' + esc(b.author) + (b.group ? " · " + esc(b.group) : "") + '</span>' +
+          '</button>';
+      });
+      listEl.innerHTML = html;
+      Array.prototype.forEach.call(listEl.querySelectorAll(".reader-item"), function (el) {
+        el.addEventListener("click", function () { selectIndex(+el.dataset.index, true); });
+      });
+      var first = listEl.querySelector(".reader-item");
+      if (first) { selectIndex(+first.dataset.index, false); }
+      else { detailEl.innerHTML = '<p class="card-body">No briefs in this track yet.</p>'; }
+    }
+
+    function renderFilters() {
+      var groups = [];
+      briefs.forEach(function (b) { if (b.group && groups.indexOf(b.group) === -1) groups.push(b.group); });
+      var filters = ["All"].concat(groups);
+      filtersEl.innerHTML = filters.map(function (f) {
+        return '<button type="button" class="filter-btn' + (f === activeFilter ? " active" : "") +
+          '" data-filter="' + esc(f) + '">' + esc(f) + '</button>';
+      }).join("");
+      Array.prototype.forEach.call(filtersEl.querySelectorAll(".filter-btn"), function (el) {
+        el.addEventListener("click", function () {
+          activeFilter = el.dataset.filter;
+          Array.prototype.forEach.call(filtersEl.querySelectorAll(".filter-btn"), function (b) {
+            b.classList.toggle("active", b === el);
+          });
+          renderList();
+        });
+      });
+    }
+
+    if (listEl && detailEl && filtersEl) {
+      if (briefs.length) {
+        renderFilters();
+        renderList();
+      } else {
+        filtersEl.style.display = "none";
+        detailEl.style.display = "none";
+        listEl.innerHTML = '<div class="empty-card">The first briefs land next week. Check back soon.</div>';
+      }
+    }
+
+    /* ---------- final papers (unchanged card grid) ---------- */
     function renderPaper(p) {
       return '<article class="paper-card">' +
         '<div class="card-top"><span class="card-date">' + fmtDate(p.date) + '</span></div>' +
@@ -164,22 +239,13 @@
         (p.link ? '<a class="link-arrow subtle" href="' + esc(p.link) + '">Read the paper <span>&rarr;</span></a>' : '') +
         '</article>';
     }
-    function emptyCard(msg) {
-      return '<div class="empty-card">' + msg + '</div>';
+    var papersEl = document.getElementById("papers-grid");
+    if (papersEl) {
+      var papers = window.AIC_PAPERS || [];
+      papersEl.innerHTML = papers.length
+        ? papers.map(renderPaper).join("")
+        : '<div class="empty-card">Final papers post as they\'re finished, through the end of the founding cycle (late August 2026).</div>';
     }
-    function fill(id, items, renderFn, emptyMsg) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      if (items && items.length) {
-        el.innerHTML = items.map(renderFn).join("");
-      } else {
-        el.innerHTML = emptyCard(emptyMsg);
-      }
-    }
-    fill("briefs-grid", window.AIC_BRIEFS, renderBrief,
-      "The first briefs land next week. Check back soon.");
-    fill("papers-grid", window.AIC_PAPERS, renderPaper,
-      "Final papers post as they're finished, through the end of the founding cycle (late August 2026).");
   })();
 </script>
 <script>
