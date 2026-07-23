@@ -471,12 +471,14 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
   position:relative;overflow:hidden;
   background:radial-gradient(130% 130% at 50% 0%, var(--mist-2) 0%, var(--paper) 62%);
   border-bottom:1px solid var(--line);
-  padding:108px 0 96px;text-align:center;
+  padding:84px 0 72px;text-align:center;
 }
-/* outlined "journey" landscape behind the hero — subtle, decorative only */
+/* outlined "journey" landscape behind the hero — subtle, decorative only.
+   Height-bounded so the whole climb (beach at the bottom, moon near the top)
+   sits inside the hero and the moon isn't clipped. */
 .hero-scene{
   position:absolute;left:50%;bottom:0;transform:translateX(-50%);
-  width:100%;min-width:1180px;max-width:1680px;height:auto;
+  width:auto;height:clamp(430px,62vh,580px);max-width:none;
   z-index:0;pointer-events:none;opacity:.5;
 }
 .hero-home .wrap{position:relative;z-index:1}

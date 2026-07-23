@@ -6,7 +6,35 @@
    view (lightly staggered per group) and counts up the single-number stats. */
 (function () {
   var root = document.documentElement;
-  if (!root.classList.contains('anim')) return;          // reduced motion → nothing to do
+  var motion = root.classList.contains('anim');           // false under prefers-reduced-motion
+
+  // The journey marker (.hs-hiker) rides the trail via <animateMotion begin="indefinite">.
+  // With motion: unhide it and set it off from the beach — on the front page it carries
+  // all the way to the moon (fill="freeze"). Without motion: park it, resting, at the moon.
+  function startHikers() {
+    // If the intro is on screen, intro.js starts the hero marker when it dissolves,
+    // so the visitor watches the full climb on the page (not hidden behind the intro).
+    var introPlaying = !!document.querySelector('.pc-intro');
+    [].forEach.call(document.querySelectorAll('.hs-hiker'), function (g) {
+      var am = g.querySelector('animateMotion');
+      if (!motion) {                                       // park it, resting, at the moon
+        g.style.visibility = 'visible';
+        if (am) am.parentNode.removeChild(am);
+        [].forEach.call(g.querySelectorAll('circle'), function (c) {
+          c.setAttribute('cx', '958'); c.setAttribute('cy', '150');
+        });
+        return;
+      }
+      if (introPlaying) return;                            // handed off to intro.js on exit
+      g.style.visibility = 'visible';
+      if (am && am.beginElement) { try { am.beginElement(); } catch (e) {} }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startHikers);
+  } else { startHikers(); }
+
+  if (!motion) return;                                    // reduced motion → no scroll reveal
   if (!('IntersectionObserver' in window)) {              // old browser → just show everything
     root.classList.remove('anim');
     return;

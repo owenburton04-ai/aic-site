@@ -71,10 +71,13 @@
         /* the journey: ocean, up over the mountains, to the moon */
         '<path class="ptrail" d="M360,600 C430,560 445,538 485,518 C565,483 585,428 645,358 C712,268 820,198 900,160 C925,148 945,150 958,150"' +
           ' stroke="#5C9CE0" stroke-width="2.25" stroke-dasharray="1 10"/>' +
-        /* the spark where the journey begins (fades in with the trail, then pulses) */
-        '<g class="pfade">' +
-          '<circle class="hs-spark-ring" cx="360" cy="600" r="5" stroke="#5C9CE0" stroke-width="1.5"/>' +
-          '<circle class="hs-spark-core" cx="360" cy="600" r="5" fill="#5C9CE0"/>' +
+        /* the journey marker: sets off from the beach and starts climbing during the
+           intro; the front page picks the journey back up and carries it to the moon. */
+        '<g class="hs-hiker" style="visibility:hidden">' +
+          '<animateMotion begin="indefinite" dur="10s" fill="freeze" calcMode="linear"' +
+            ' path="M360,600 C430,560 445,538 485,518 C565,483 585,428 645,358 C712,268 820,198 900,160 C925,148 945,150 958,150"/>' +
+          '<circle class="hs-spark-ring" cx="0" cy="0" r="6" stroke="#5C9CE0" stroke-width="1.5"/>' +
+          '<circle class="hs-spark-core" cx="0" cy="0" r="4.2" fill="#5C9CE0"/>' +
         '</g>' +
       '</svg>' +
     '</div>';
@@ -83,10 +86,28 @@
   root.appendChild(o);
   root.style.overflow = 'hidden'; // briefly lock scroll during the intro
 
+  // set the journey marker off from the beach (this file only runs when motion is allowed)
+  var hiker = o.querySelector('.hs-hiker');
+  if (hiker) {
+    hiker.style.visibility = 'visible';
+    var am = hiker.querySelector('animateMotion');
+    if (am && am.beginElement) { try { am.beginElement(); } catch (e) {} }
+  }
+
   var HOLD = 2100;  // ms: lets the range fully draw + the trail march a beat before it leaves
   var EXIT = 780;   // ms the dissolve takes
 
-  setTimeout(function () { o.classList.add('pc-leaving'); }, HOLD);
+  setTimeout(function () {
+    o.classList.add('pc-leaving');
+    // hand the journey to the page: as the intro dissolves, the home hero's marker
+    // sets off from the beach and climbs the rest of the way to the moon.
+    var ph = document.querySelector('.hero-scene .hs-hiker');
+    if (ph) {
+      ph.style.visibility = 'visible';
+      var pam = ph.querySelector('animateMotion');
+      if (pam && pam.beginElement) { try { pam.beginElement(); } catch (e) {} }
+    }
+  }, HOLD);
   setTimeout(function () {
     if (o.parentNode) o.parentNode.removeChild(o);
     root.style.overflow = '';
