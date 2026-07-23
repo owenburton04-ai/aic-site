@@ -35,38 +35,41 @@
     'display:flex;align-items:center;justify-content:center;';
   o.innerHTML =
     '<div class="pc-intro-inner">' +
-      '<svg class="pc-intro-scene" viewBox="0 0 1440 320" aria-hidden="true"' +
+      '<svg class="pc-intro-scene" viewBox="0 0 1200 640" aria-hidden="true"' +
         ' preserveAspectRatio="xMidYMax meet" fill="none"' +
         ' stroke-linecap="round" stroke-linejoin="round">' +
         /* detail layer (fades in as a group, keeping each element\'s opacity) */
         '<g class="pfade">' +
-          '<circle cx="1150" cy="120" r="40" stroke="#5C9CE0" stroke-width="1.75" opacity=".7"/>' +
-          '<path d="M654,120 L668,108 L680,118 L692,106 L706,120" stroke="#5C9CE0" stroke-width="1.5"/>' +
-          '<path d="M978,92 q8,-8 16,0 q8,-8 16,0" stroke="#5C9CE0" stroke-width="1.5"/>' +
-          '<path d="M1024,112 q6,-6 12,0 q6,-6 12,0" stroke="#5C9CE0" stroke-width="1.5"/>' +
-          '<path d="M240,272 L470,272 M600,290 L840,290 M360,306 L560,306 M920,278 L1140,278"' +
+          '<circle cx="980" cy="120" r="46" stroke="#5C9CE0" stroke-width="1.75" opacity=".7"/>' +
+          '<circle cx="966" cy="104" r="5" stroke="#5C9CE0" stroke-width="1.25" opacity=".55"/>' +
+          '<circle cx="998" cy="132" r="7.5" stroke="#5C9CE0" stroke-width="1.25" opacity=".55"/>' +
+          '<circle cx="970" cy="140" r="4" stroke="#5C9CE0" stroke-width="1.25" opacity=".55"/>' +
+          '<path d="M702,200 L712,188 L722,198 L734,185 L746,200" stroke="#5C9CE0" stroke-width="1.5"/>' +
+          '<path d="M300,150 q10,-9 20,0 q10,-9 20,0" stroke="#5C9CE0" stroke-width="1.5"/>' +
+          '<path d="M366,182 q8,-7 16,0 q8,-7 16,0" stroke="#5C9CE0" stroke-width="1.5"/>' +
+          '<path d="M180,545 L430,545 M540,565 L800,565 M320,588 L560,588 M880,552 L1120,552"' +
             ' stroke="#5C9CE0" stroke-width="1.5" stroke-dasharray="34 20" opacity=".55"/>' +
         '</g>' +
         /* far ridge */
         '<path class="pdraw" pathLength="1" style="animation-delay:.15s"' +
-          ' d="M0,250 L150,168 L280,220 L430,150 L560,205 L700,150 L860,210 L1010,158 L1180,210 L1320,168 L1440,205"' +
+          ' d="M0,430 L150,330 L300,400 L470,315 L640,395 L820,310 L1000,390 L1200,345"' +
           ' stroke="#A9C9EC" stroke-width="1.5"/>' +
         /* near mountains */
         '<path class="pdraw" pathLength="1" style="animation-delay:.35s"' +
-          ' d="M-10,252 L180,252 L360,150 L470,205 L560,176 L680,95 L820,205 L940,160 L1080,215 L1240,176 L1440,235"' +
+          ' d="M-10,520 L110,520 L300,300 L430,420 L560,340 L720,175 L900,420 L1010,330 L1120,440 L1210,505"' +
           ' stroke="#5C9CE0" stroke-width="2"/>' +
+        /* ocean surface */
+        '<path class="pdraw" pathLength="1" style="animation-delay:.55s"' +
+          ' d="M-10,520 L1210,520" stroke="#5C9CE0" stroke-width="1.5"/>' +
         /* pines */
         '<path class="pdraw" pathLength="1" style="animation-delay:.7s"' +
-          ' d="M112,252 L112,224 M94,236 L112,206 L130,236 M98,224 L112,198 L126,224 M102,212 L112,192 L122,212"' +
+          ' d="M150,520 L150,478 M128,494 L150,458 L172,494 M132,478 L150,448 L168,478 M136,466 L150,442 L164,466"' +
           ' stroke="#3F7DC0" stroke-width="1.5"/>' +
         '<path class="pdraw" pathLength="1" style="animation-delay:.8s"' +
-          ' d="M172,252 L172,230 M158,240 L172,216 L186,240 M161,230 L172,210 L183,230"' +
+          ' d="M210,520 L210,486 M192,500 L210,470 L228,500 M196,486 L210,462 L224,486"' +
           ' stroke="#3F7DC0" stroke-width="1.5"/>' +
-        /* lake surface */
-        '<path class="pdraw" pathLength="1" style="animation-delay:.55s"' +
-          ' d="M-10,252 L1440,252" stroke="#5C9CE0" stroke-width="1.5"/>' +
-        /* journey trail */
-        '<path class="ptrail" d="M520,322 C596,300 616,284 618,266 C620,250 656,250 690,252"' +
+        /* the journey: ocean, up over the mountains, to the moon */
+        '<path class="ptrail" d="M360,600 C430,560 445,538 485,518 C565,483 585,428 645,358 C712,268 820,198 900,160 C925,148 945,150 958,150"' +
           ' stroke="#5C9CE0" stroke-width="2.25" stroke-dasharray="1 10"/>' +
       '</svg>' +
     '</div>';

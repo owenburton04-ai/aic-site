@@ -170,7 +170,7 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
    the drawing is the whole moment, matching the home hero it dissolves into. */
 .pc-intro-inner{
   position:relative;display:flex;align-items:center;justify-content:center;
-  width:min(1040px,92vw);
+  width:min(1160px,94vw);
 }
 .pc-intro-scene{width:100%;height:auto;overflow:visible}
 /* ridgelines / pines / lake draw themselves on (dash-offset sweep) */
