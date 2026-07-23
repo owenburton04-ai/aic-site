@@ -530,7 +530,20 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
 .filter-btn.active{background:var(--sky);border-color:var(--sky);color:#fff}
 
 .reader{display:grid;grid-template-columns:minmax(280px,360px) 1fr;gap:24px;align-items:start}
-.reader-list{display:flex;flex-direction:column;gap:12px}
+/* the brief list scrolls inside its own panel so the reading room stays compact
+   (no trailing white space beside the pinned detail). Items fade in/out at the
+   top and bottom edges, so they seem to come up from nowhere as you scroll. */
+.reader-list{
+  display:flex;flex-direction:column;gap:12px;
+  max-height:70vh;overflow-y:auto;overflow-x:hidden;padding-right:10px;
+  scrollbar-width:thin;scrollbar-color:var(--line) transparent;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);
+  mask-image:linear-gradient(to bottom,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);
+}
+.reader-list::-webkit-scrollbar{width:8px}
+.reader-list::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+.reader-list::-webkit-scrollbar-thumb:hover{background:var(--faint)}
+.reader-item{margin:1px 0}
 .reader-item{
   display:flex;flex-direction:column;align-items:flex-start;gap:8px;
   width:100%;text-align:left;cursor:pointer;font:inherit;color:inherit;
@@ -545,6 +558,7 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
 .reader-detail{
   background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px 30px;
   position:sticky;top:90px;transition:opacity .2s ease;
+  max-height:70vh;overflow-y:auto;
 }
 .reader-detail h3{font-size:24px;font-weight:600;letter-spacing:-.01em;line-height:1.25;margin:4px 0 2px}
 .reader-detail .card-body{font-size:15.5px;margin-top:10px}
@@ -617,7 +631,10 @@ html.anim .step.rv-in::after{transform:scaleX(1)}
   .hero-home{padding:66px 0 58px}
   .hero-grid{grid-template-columns:1fr;gap:34px}
   .reader{grid-template-columns:1fr;gap:16px}
-  .reader-detail{position:static;top:auto}
+  /* stacked on mobile: no inner scroll or edge fade, natural page flow */
+  .reader-list{max-height:none;overflow:visible;padding-right:0;
+    -webkit-mask-image:none;mask-image:none}
+  .reader-detail{position:static;top:auto;max-height:none;overflow:visible}
   .hero-foot{margin-top:54px}
   .section{padding:54px 0}
   .who{grid-template-columns:1fr;gap:30px}
