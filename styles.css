@@ -474,10 +474,12 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
   .brand-name{display:none}
   .nav{gap:18px}
   .nav a{letter-spacing:0}
-  /* 5-item nav no longer fits one row: brand on top, nav wraps below */
-  .header-inner{flex-wrap:wrap;height:auto;padding:12px 0;row-gap:10px}
-  .nav{width:100%;gap:16px;flex-wrap:wrap;justify-content:flex-start}
-  .nav .nav-apply{margin-left:auto;padding:7px 14px}
+  /* 5-item nav no longer fits one row: brand on top, nav wraps below.
+     Keep the .wrap side padding (only override vertical) so nothing hugs the edge. */
+  .header-inner{flex-wrap:wrap;height:auto;padding-block:12px;row-gap:12px}
+  .nav{width:100%;gap:14px 18px;flex-wrap:wrap;justify-content:flex-start;align-items:center}
+  .nav a{font-size:13px}
+  .nav .nav-apply{margin-left:auto;padding:8px 16px}
   .hero{padding:56px 0 50px}
   .hero-grid{grid-template-columns:1fr;gap:34px}
   .hero-foot{margin-top:54px}
