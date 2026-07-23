@@ -35,17 +35,17 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-lead-col">
-        <p class="eyebrow"><span class="dot"></span> Founding cycle · Week 1 underway</p>
+        <p class="eyebrow"><span class="dot"></span> Founding cycle · First briefs live</p>
         <h1 class="hero-title">Research</h1>
-        <p class="hero-lead">Our founding research cycle is underway. The first findings (on how AI is genuinely used across investment banking, private equity &amp; venture capital, wealth management &amp; financial planning, and corporate finance) start publishing here <strong>next week</strong>.</p>
+        <p class="hero-lead">Our founding research cycle is underway, and the first briefs are live below. Early findings on how AI is genuinely used across investment banking, corporate finance, real estate, and wealth management &amp; investing, first-hand and sourced.</p>
       </div>
       <aside class="hero-panel" aria-label="The founding cycle at a glance">
         <p class="panel-kicker">At a glance</p>
         <dl class="panel-facts">
           <div><dt>Focus</dt><dd>How AI is really used in finance</dd></div>
-          <div><dt>Coverage</dt><dd>IB · PE/VC · Wealth · Corporate</dd></div>
+          <div><dt>Coverage</dt><dd>IB · Corporate · Real Estate · Wealth</dd></div>
           <div><dt>Lenses</dt><dd>Efficient uses · ROI gap · Real workflows</dd></div>
-          <div><dt>First briefs</dt><dd>Publishing next week</dd></div>
+          <div><dt>First briefs</dt><dd>Live now</dd></div>
         </dl>
         <div class="panel-meta">
           <span>Independent · Student-founded</span>
@@ -59,8 +59,8 @@
   <section class="section">
     <div class="wrap">
       <p class="section-kicker">Weekly research briefs</p>
-      <h2 class="tracks-head">A couple of the cohort's briefs, posted here each week.</h2>
-      <p class="tracks-lead muted">Every member writes a ~300-word brief weekly; a few are featured here as they're ready, each leading with the honest call: working, overhyped, mixed, or too early to tell.</p>
+      <h2 class="tracks-head">The cohort's briefs, posted here each week.</h2>
+      <p class="tracks-lead muted">Every member writes a ~300-word brief weekly, each leading with the honest takeaway. Below is the founding cohort's first week of published findings, across all four research tracks.</p>
       <div id="briefs-grid" class="card-grid" aria-live="polite"></div>
     </div>
   </section>
@@ -147,7 +147,7 @@
     }
     function renderBrief(b) {
       return '<article class="brief-card">' +
-        '<div class="card-top"><span class="verdict-pill">' + esc(b.verdict || "") + '</span>' +
+        '<div class="card-top"><span class="takeaway-tag">' + esc(b.takeaway || "") + '</span>' +
         '<span class="card-date">' + fmtDate(b.date) + '</span></div>' +
         '<h3>' + esc(b.title) + '</h3>' +
         '<p class="card-meta">' + esc(b.author) + (b.group ? " · " + esc(b.group) : "") + '</p>' +
