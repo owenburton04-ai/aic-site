@@ -535,10 +535,9 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
    top and bottom edges, so they seem to come up from nowhere as you scroll. */
 .reader-list{
   display:flex;flex-direction:column;gap:12px;
-  max-height:70vh;overflow-y:auto;overflow-x:hidden;padding-right:10px;
+  max-height:70vh;overflow-y:auto;overflow-x:hidden;
+  padding-right:10px;padding-bottom:2px;
   scrollbar-width:thin;scrollbar-color:var(--line) transparent;
-  -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);
-  mask-image:linear-gradient(to bottom,transparent 0,#000 16px,#000 calc(100% - 16px),transparent 100%);
 }
 .reader-list::-webkit-scrollbar{width:8px}
 .reader-list::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
@@ -635,9 +634,8 @@ html.anim .step.rv-in::after{transform:scaleX(1)}
   .hero-home{padding:66px 0 58px}
   .hero-grid{grid-template-columns:1fr;gap:34px}
   .reader{grid-template-columns:1fr;gap:16px}
-  /* stacked on mobile: no inner scroll or edge fade, natural page flow */
-  .reader-list{max-height:none;overflow:visible;padding-right:0;
-    -webkit-mask-image:none;mask-image:none}
+  /* stacked on mobile: no inner scroll, natural page flow */
+  .reader-list{max-height:none;overflow:visible;padding-right:0}
   .reader-detail{position:static;top:auto;max-height:none;overflow:visible}
   .hero-foot{margin-top:54px}
   .section{padding:54px 0}
