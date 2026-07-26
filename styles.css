@@ -307,6 +307,10 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
 }
 .founders-intro p{font-size:17px}
 @media (max-width:760px){.founders{grid-template-columns:1fr;gap:26px}}
+/* about hero: a smaller founders photo that balances the "Why we started" heading */
+.hero-grid .founders-figure{max-width:300px;margin:0 auto;width:100%}
+.hero-grid .founders-photo{aspect-ratio:4 / 5}
+.hero-grid .founders-figure p{max-width:300px}
 
 /* research: three-lens strip (condensed) */
 .lens-strip{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px}
