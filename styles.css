@@ -311,6 +311,7 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
 .hero-grid .founders-figure{max-width:300px;margin:0 auto;width:100%}
 .hero-grid .founders-photo{aspect-ratio:4 / 5}
 .hero-grid .founders-figure p{max-width:300px}
+.hero-grid .founders-figure figcaption{font-size:12.5px;white-space:nowrap}
 
 /* research: three-lens strip (condensed) */
 .lens-strip{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:44px}
