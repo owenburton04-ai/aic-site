@@ -235,6 +235,16 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
 .checks li{display:grid;grid-template-columns:24px 1fr;gap:12px;color:var(--graphite)}
 .checks li::before{content:"→";color:var(--sky);font-weight:700}
 
+/* centered section variant — centers kicker/head/lead (+ optional checks) */
+.section.center{text-align:center}
+.section.center .tracks-head,
+.section.center .tracks-lead{margin-left:auto;margin-right:auto}
+.section.center .checks{max-width:600px;margin-left:auto;margin-right:auto;text-align:left}
+.section.center .hero-actions{justify-content:center}
+.section.compact{padding:46px 0}
+.pricing-note{text-align:center;color:var(--muted);font-size:15px;margin-top:26px}
+.pricing-note a{color:var(--sky-dark);font-weight:500}
+
 /* research tracks (2-col list) */
 .tracks-head{font-family:"Space Grotesk","Inter",sans-serif;font-weight:600;letter-spacing:-.02em;
   font-size:clamp(26px,3.4vw,38px);line-height:1.15;max-width:760px}
@@ -322,6 +332,8 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
 .cta-band p{color:#A9B7C2;margin-top:16px;max-width:560px}
 .cta-band .actions{margin-top:34px}
 .cta-band .mark span{color:var(--sky)}
+.cta-band.center{text-align:center}
+.cta-band.center h2,.cta-band.center p{margin-left:auto;margin-right:auto}
 
 /* ---------- form ---------- */
 .form-wrap{max-width:660px}
