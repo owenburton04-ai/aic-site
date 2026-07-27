@@ -9,25 +9,50 @@
   var motion = root.classList.contains('anim');           // false under prefers-reduced-motion
 
   // The journey marker (.hs-hiker) rides the trail via <animateMotion begin="indefinite">.
-  // With motion: unhide it and set it off from the beach — on the front page it carries
-  // all the way to the moon (fill="freeze"). Without motion: park it, resting, at the moon.
+  // With motion: unhide it and set it off from the beach — on the front page it climbs all
+  // the way to the top (fill="freeze") and then opens into the firework. Without motion:
+  // park it at the trail's end with the firework already bloomed.
+  var TRAIL_END = { x: 958, y: 150 };   // matches the end of the animateMotion path
+  var TRAIL_MS = 6000;                  // matches animateMotion dur="6s"
+
+  // Set a marker off and fire the firework when it finishes its climb. Exposed because
+  // intro.js hands the journey over to the page as the intro dissolves.
+  function startJourney(g) {
+    g.style.visibility = 'visible';
+    var am = g.querySelector('animateMotion');
+    if (am && am.beginElement) { try { am.beginElement(); } catch (e) {} }
+    var burst = document.querySelector('.hs-burst');
+    if (!burst) return;
+    var fired = false;
+    function go() {
+      if (fired) return;
+      fired = true;
+      burst.classList.add('go');
+      g.classList.add('hs-spent');       // the spark becomes the firework, so it fades out
+    }
+    if (am) { try { am.addEventListener('endEvent', go); } catch (e) {} }
+    setTimeout(go, TRAIL_MS + 120);     // fallback: SMIL end events aren't universal
+  }
+  window.AIC_startJourney = startJourney;
+
   function startHikers() {
     // If the intro is on screen, intro.js starts the hero marker when it dissolves,
     // so the visitor watches the full climb on the page (not hidden behind the intro).
     var introPlaying = !!document.querySelector('.pc-intro');
     [].forEach.call(document.querySelectorAll('.hs-hiker'), function (g) {
       var am = g.querySelector('animateMotion');
-      if (!motion) {                                       // park it, resting, at the moon
+      if (!motion) {                          // park it at the end, firework already bloomed
         g.style.visibility = 'visible';
         if (am) am.parentNode.removeChild(am);
         [].forEach.call(g.querySelectorAll('circle'), function (c) {
-          c.setAttribute('cx', '958'); c.setAttribute('cy', '150');
+          c.setAttribute('cx', TRAIL_END.x); c.setAttribute('cy', TRAIL_END.y);
         });
+        var rb = document.querySelector('.hs-burst');
+        if (rb) rb.classList.add('rest');
         return;
       }
       if (introPlaying) return;                            // handed off to intro.js on exit
-      g.style.visibility = 'visible';
-      if (am && am.beginElement) { try { am.beginElement(); } catch (e) {} }
+      startJourney(g);
     });
   }
   if (document.readyState === 'loading') {

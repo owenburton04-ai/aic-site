@@ -37,11 +37,6 @@
   <section class="hero hero-home">
     <svg class="hero-scene" viewBox="0 0 1200 640" aria-hidden="true" preserveAspectRatio="xMidYMax meet"
          fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <!-- moon -->
-      <circle cx="980" cy="120" r="46" stroke="#5C9CE0" stroke-width="1.75" opacity=".7"/>
-      <circle cx="966" cy="104" r="5" stroke="#5C9CE0" stroke-width="1.25" opacity=".55"/>
-      <circle cx="998" cy="132" r="7.5" stroke="#5C9CE0" stroke-width="1.25" opacity=".55"/>
-      <circle cx="970" cy="140" r="4" stroke="#5C9CE0" stroke-width="1.25" opacity=".55"/>
       <!-- birds -->
       <path class="hs-bird" d="M300,150 q10,-9 20,0 q10,-9 20,0" stroke="#5C9CE0" stroke-width="1.5"/>
       <path class="hs-bird hs-bird-2" d="M366,182 q8,-7 16,0 q8,-7 16,0" stroke="#5C9CE0" stroke-width="1.5"/>
@@ -63,17 +58,36 @@
             stroke="#3F7DC0" stroke-width="1.5"/>
       <path d="M210,520 L210,486 M192,500 L210,470 L228,500 M196,486 L210,462 L224,486"
             stroke="#3F7DC0" stroke-width="1.5"/>
-      <!-- the journey: ocean, up over the mountains, to the moon -->
+      <!-- the journey: ocean, up over the mountains, into the sky -->
       <path class="hs-trail" d="M360,600 C430,560 445,538 485,518 C565,483 585,428 645,358 C712,268 820,198 900,160 C925,148 945,150 958,150"
             stroke="#5C9CE0" stroke-width="2.25" stroke-dasharray="1 10" opacity=".85"/>
-      <!-- the journey marker: a spark that travels the trail from the beach to the moon.
-           Starts hidden; reveal.js unhides + starts it (or, for reduced motion, parks it
-           at the moon). Circles sit at 0,0 so the <g> origin rides the path exactly. -->
+      <!-- the journey marker: a spark that travels the trail from the beach up into the sky,
+           where it bursts (see .hs-burst below). Starts hidden; reveal.js unhides + starts it
+           (or, for reduced motion, parks it at the end of the trail and shows the burst
+           already bloomed). Circles sit at 0,0 so the <g> origin rides the path exactly. -->
       <g class="hs-hiker" style="visibility:hidden">
-        <animateMotion begin="indefinite" dur="10s" fill="freeze" calcMode="linear"
+        <animateMotion begin="indefinite" dur="6s" fill="freeze" calcMode="linear"
           path="M360,600 C430,560 445,538 485,518 C565,483 585,428 645,358 C712,268 820,198 900,160 C925,148 945,150 958,150"/>
         <circle class="hs-spark-ring" cx="0" cy="0" r="6" stroke="#5C9CE0" stroke-width="1.5"/>
         <circle class="hs-spark-core" cx="0" cy="0" r="4.2" fill="#5C9CE0"/>
+      </g>
+      <!-- the payoff: the spark reaches the top of the climb and opens into a firework.
+           Sits at the trail's end point. Hidden until reveal.js adds .go (which it does when
+           the marker finishes its run); a faint starburst is what stays behind. -->
+      <g class="hs-burst" transform="translate(958,150)">
+        <circle class="hs-burst-bloom" r="34" stroke="#5C9CE0" stroke-width="1.5"/>
+        <circle class="hs-burst-flash" r="7" fill="#5C9CE0"/>
+        <!-- 12 rays, alternating long/short so the afterglow reads as a burst, not a wheel -->
+        <g class="hs-burst-rays" stroke="#5C9CE0" stroke-width="1.75">
+          <path d="M10,0 L40,0 M8.7,5 L24.2,14 M5,8.7 L20,34.6 M0,10 L0,28
+                   M-5,8.7 L-20,34.6 M-8.7,5 L-24.2,14 M-10,0 L-40,0 M-8.7,-5 L-24.2,-14
+                   M-5,-8.7 L-20,-34.6 M0,-10 L0,-28 M5,-8.7 L20,-34.6 M8.7,-5 L24.2,-14"/>
+        </g>
+        <g class="hs-burst-embers" fill="#A9C9EC">
+          <circle cx="52" cy="0" r="2"/><circle cx="26" cy="45" r="2"/>
+          <circle cx="-26" cy="45" r="2"/><circle cx="-52" cy="0" r="2"/>
+          <circle cx="-26" cy="-45" r="2"/><circle cx="26" cy="-45" r="2"/>
+        </g>
       </g>
     </svg>
     <div class="wrap">

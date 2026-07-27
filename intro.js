@@ -40,10 +40,6 @@
         ' stroke-linecap="round" stroke-linejoin="round">' +
         /* detail layer (fades in as a group, keeping each element\'s opacity) */
         '<g class="pfade">' +
-          '<circle cx="980" cy="120" r="46" stroke="#5C9CE0" stroke-width="1.75" opacity=".7"/>' +
-          '<circle cx="966" cy="104" r="5" stroke="#5C9CE0" stroke-width="1.25" opacity=".55"/>' +
-          '<circle cx="998" cy="132" r="7.5" stroke="#5C9CE0" stroke-width="1.25" opacity=".55"/>' +
-          '<circle cx="970" cy="140" r="4" stroke="#5C9CE0" stroke-width="1.25" opacity=".55"/>' +
           '<path d="M702,200 L712,188 L722,198 L734,185 L746,200" stroke="#5C9CE0" stroke-width="1.5"/>' +
           '<path d="M300,150 q10,-9 20,0 q10,-9 20,0" stroke="#5C9CE0" stroke-width="1.5"/>' +
           '<path d="M366,182 q8,-7 16,0 q8,-7 16,0" stroke="#5C9CE0" stroke-width="1.5"/>' +
@@ -68,11 +64,11 @@
         '<path class="pdraw" pathLength="1" style="animation-delay:.8s"' +
           ' d="M210,520 L210,486 M192,500 L210,470 L228,500 M196,486 L210,462 L224,486"' +
           ' stroke="#3F7DC0" stroke-width="1.5"/>' +
-        /* the journey: ocean, up over the mountains, to the moon */
+        /* the journey: ocean, up over the mountains, into the sky */
         '<path class="ptrail" d="M360,600 C430,560 445,538 485,518 C565,483 585,428 645,358 C712,268 820,198 900,160 C925,148 945,150 958,150"' +
           ' stroke="#5C9CE0" stroke-width="2.25" stroke-dasharray="1 10"/>' +
         /* the journey marker: sets off from the beach and starts climbing during the
-           intro; the front page picks the journey back up and carries it to the moon. */
+           intro; the front page picks the journey back up and carries it to the burst. */
         '<g class="hs-hiker" style="visibility:hidden">' +
           '<animateMotion begin="indefinite" dur="10s" fill="freeze" calcMode="linear"' +
             ' path="M360,600 C430,560 445,538 485,518 C565,483 585,428 645,358 C712,268 820,198 900,160 C925,148 945,150 958,150"/>' +
@@ -100,12 +96,16 @@
   setTimeout(function () {
     o.classList.add('pc-leaving');
     // hand the journey to the page: as the intro dissolves, the home hero's marker
-    // sets off from the beach and climbs the rest of the way to the moon.
+    // sets off from the beach, climbs, and opens into the firework at the top.
     var ph = document.querySelector('.hero-scene .hs-hiker');
     if (ph) {
-      ph.style.visibility = 'visible';
-      var pam = ph.querySelector('animateMotion');
-      if (pam && pam.beginElement) { try { pam.beginElement(); } catch (e) {} }
+      if (window.AIC_startJourney) {
+        window.AIC_startJourney(ph);           // also arms the firework at the top
+      } else {                                 // reveal.js not loaded — climb without the burst
+        ph.style.visibility = 'visible';
+        var pam = ph.querySelector('animateMotion');
+        if (pam && pam.beginElement) { try { pam.beginElement(); } catch (e) {} }
+      }
     }
   }, HOLD);
   setTimeout(function () {
