@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="styles.css" />
 <script src="intro.js"></script>
 <script defer src="reveal.js"></script>
+<script defer src="forms.js"></script>
 </head>
 <body>
 
@@ -41,7 +42,8 @@
         <h1 class="hero-title">See how AI is really used across&nbsp;finance.</h1>
         <p class="hero-lead">A dedicated team researches your question and hands you a clear, cited report on what's <em>actually</em> working, what applies to you, and where to start. Real research, real interviews, a one-to-two week turnaround.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#how-it-works">See how it works <span>→</span></a>
+          <a class="btn btn-primary" href="#inquiry">Start an inquiry <span>→</span></a>
+          <a class="link-arrow subtle" href="#how-it-works">See how it works <span>→</span></a>
         </div>
       </div>
       <aside class="hero-panel" aria-label="How an engagement works">
@@ -148,24 +150,28 @@
           <p class="price-tier">Starter</p>
           <p class="price-amt">$500</p>
           <p class="price-desc">A focused single-question scan. Desk research, short written report.</p>
+          <a class="price-pick" href="#inquiry" data-tier-pick="500">Start with this <span>→</span></a>
         </div>
         <div class="price-card">
           <p class="price-tier">Plus</p>
           <p class="price-amt">$1,000</p>
           <p class="price-desc">Broader scope, three to five expert interviews, a scored findings report.</p>
+          <a class="price-pick" href="#inquiry" data-tier-pick="1000">Start with this <span>→</span></a>
         </div>
         <div class="price-card">
           <p class="price-tier">Default</p>
           <p class="price-amt">$2,000</p>
           <p class="price-desc">A full finance-AI diagnostic across dimensions, plus a live presentation.</p>
+          <a class="price-pick" href="#inquiry" data-tier-pick="2000">Start with this <span>→</span></a>
         </div>
         <div class="price-card">
           <p class="price-tier">Roadmap</p>
           <p class="price-amt">$2,500</p>
           <p class="price-desc">Everything in Default, plus a prioritized implementation roadmap.</p>
+          <a class="price-pick" href="#inquiry" data-tier-pick="2500">Start with this <span>→</span></a>
         </div>
       </div>
-      <p class="pricing-note">Not sure which fits, or want to start with the $500 pilot? For more information, email <a href="mailto:owenburton04@gmail.com?subject=AIC%20pilot%20inquiry">owenburton04@gmail.com</a>.</p>
+      <p class="pricing-note">Not sure which fits? Leave the package blank on the <a href="#inquiry">inquiry form</a> and we will tell you which one your question actually needs.</p>
     </div>
   </section>
 
@@ -201,7 +207,108 @@
       <h2>Let's find your first question.</h2>
       <p>Tell us the corner of your business where AI feels most uncertain. We'll turn it into a clear, cited answer you can act on, starting with a fixed-scope $500 pilot.</p>
       <div class="actions">
-        <a class="btn btn-light" href="mailto:owenburton04@gmail.com?subject=AIC%20founding-client%20inquiry">Email us · owenburton04@gmail.com <span>→</span></a>
+        <a class="btn btn-light" href="#inquiry">Start an inquiry <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INQUIRY FORM -->
+  <section class="section" id="inquiry">
+    <div class="wrap form-wrap">
+      <p class="section-kicker">Start here</p>
+      <h2 class="tracks-head">Tell us what you want to know.</h2>
+      <p class="form-intro">The question is the important part, so give it as much or as little detail as you like. We read every inquiry ourselves and reply within one business day.</p>
+
+      <noscript>
+        <p class="form-noscript">This form needs JavaScript to send your inquiry, and it looks like JavaScript is turned off. Email us at <a href="mailto:owenburton04@gmail.com?subject=AIC%20inquiry">owenburton04@gmail.com</a> instead and we will pick it up from there.</p>
+      </noscript>
+
+      <form class="form-card" id="inquiry-form" novalidate data-needs-js
+            data-endpoint="https://hub.appliedintelligencecollective.com/api/intake/inquiry"
+            data-thanks="#inquiry-thanks"
+            data-pending="Sending your inquiry…">
+
+        <!-- Honeypot. Parked off-screen (not type=hidden), skipped by keyboard and
+             password managers, and always submitted. A value means a bot: the hub
+             returns success and quietly drops the submission. -->
+        <div class="hp" aria-hidden="true">
+          <label for="inquiry-website-url">Website</label>
+          <input id="inquiry-website-url" name="website_url" type="text"
+                 tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="inq-company">Company <span class="req">*</span></label>
+            <input class="input" id="inq-company" name="company" type="text" required
+                   data-label="company" data-max="200" autocomplete="organization"
+                   placeholder="Northgate Capital" />
+          </div>
+          <div class="field">
+            <label for="inq-name">Your name <span class="req">*</span></label>
+            <input class="input" id="inq-name" name="contact_name" type="text" required
+                   data-label="name" data-max="120" autocomplete="name"
+                   placeholder="Jordan Lee" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="inq-email">Work email <span class="req">*</span></label>
+            <input class="input" id="inq-email" name="email" type="email" required
+                   data-label="email" data-max="254" data-check="email" autocomplete="email"
+                   placeholder="you@company.com" />
+          </div>
+          <div class="field">
+            <label for="inq-phone">Phone <span class="hint">optional</span></label>
+            <input class="input" id="inq-phone" name="phone" type="tel"
+                   data-label="phone" data-max="40" autocomplete="tel"
+                   placeholder="(555) 010-2200" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="inq-tier">Package you have in mind <span class="hint">optional</span></label>
+          <select id="inq-tier" name="tier_interest" data-number data-label="package">
+            <option value="">Not sure yet</option>
+            <option value="500">$500 · Starter (founding pilot)</option>
+            <option value="1000">$1,000 · Plus</option>
+            <option value="2000">$2,000 · Default</option>
+            <option value="2500">$2,500 · Roadmap</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="inq-question">What do you want to know about AI in your industry? <span class="hint">optional, but the most useful thing you can tell us</span></label>
+          <textarea id="inq-question" name="question" data-label="question" data-max="4000"
+                    placeholder="For example: which parts of our diligence process are firms like ours actually automating with AI, and what is still not worth it? A rough question is fine, we help sharpen it."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="inq-message">Anything else we should know? <span class="hint">optional</span></label>
+          <textarea id="inq-message" name="message" data-label="message" data-max="4000"
+                    placeholder="Timing, team size, a deadline you're working toward, or anything that shapes the work."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="inq-source">How did you hear about us? <span class="hint">optional</span></label>
+          <input class="input" id="inq-source" name="source" type="text"
+                 data-label="source" data-max="200" placeholder="LinkedIn, a referral, a conversation…" />
+        </div>
+
+        <div class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
+
+        <div class="form-submit">
+          <button class="btn btn-primary" type="submit" data-submit disabled
+                  data-busy-label="Sending…">Send inquiry <span>→</span></button>
+          <p class="form-fine">We reply within one business day. Nothing you send here is shared outside AIC. Prefer email? Write to <a href="mailto:owenburton04@gmail.com?subject=AIC%20inquiry">owenburton04@gmail.com</a>.</p>
+        </div>
+      </form>
+
+      <div class="form-thanks" id="inquiry-thanks" tabindex="-1" hidden>
+        <h3>Thanks, that's in.</h3>
+        <p>Your inquiry landed with us and we'll reply within one business day, so keep an eye on your inbox.</p>
+        <p>If your question shifts in the meantime, just reply to our email and we'll rescope it.</p>
       </div>
     </div>
   </section>

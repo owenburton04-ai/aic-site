@@ -362,6 +362,77 @@ textarea{min-height:130px;resize:vertical;line-height:1.6}
 input[type=file]{font-size:14px;color:var(--muted)}
 .form-submit{margin-top:14px}
 .form-fine{color:var(--faint);font-size:13px;margin-top:18px}
+.form-fine a{color:var(--sky-dark);font-weight:500}
+
+/* ---------- intake forms (hub-backed: inquiry + application) ----------
+   --alert is a functional colour, not a brand one: validation errors need red to
+   read as errors, and Sand at legible contrast reads as a warning. Everything
+   else here stays on the Sky & Graphite palette. */
+:root{--alert:#A63D2A;--alert-tint:rgba(166,61,42,.08)}
+
+.form-card{
+  background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:34px 36px;box-shadow:0 1px 2px rgba(30,42,51,.03);
+}
+.form-card .field:last-of-type{margin-bottom:0}
+
+/* honeypot: off-screen, never display:none. Bots skip hidden inputs and fill
+   visible ones they find parked off-canvas. */
+.hp{position:absolute;left:-9999px;top:0;width:1px;height:1px;overflow:hidden}
+
+.field-error{color:var(--alert);font-size:13.5px;line-height:1.45;margin-top:7px}
+.input[aria-invalid="true"],select[aria-invalid="true"],textarea[aria-invalid="true"]{
+  border-color:var(--alert);
+}
+.input[aria-invalid="true"]:focus,select[aria-invalid="true"]:focus,
+textarea[aria-invalid="true"]:focus{box-shadow:0 0 0 3px var(--alert-tint)}
+
+.form-status{
+  margin-top:20px;border-radius:11px;padding:14px 17px;font-size:14.5px;line-height:1.55;
+  border:1px solid var(--line);background:var(--mist-2);color:var(--muted);
+}
+.form-status.is-error{border-color:var(--alert);background:var(--alert-tint);color:var(--alert)}
+.form-status.is-error a{color:var(--alert);font-weight:600;text-decoration:underline}
+.form-status.is-ok{border-color:var(--sky);background:rgba(92,156,224,.08);color:var(--sky-dark)}
+.form-status-extra{margin-top:6px}
+
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn[disabled]:hover{background:var(--sky)}
+.btn[aria-busy="true"]{cursor:progress}
+
+/* the thank-you state that replaces the form in place */
+.form-thanks{
+  background:var(--mist-2);border:1px solid var(--sky);border-radius:16px;
+  padding:34px 36px;
+}
+.form-thanks:focus{outline:none;box-shadow:0 0 0 3px rgba(92,156,224,.22)}
+/* on a tinted section the panel would blend into the background, so flip it white */
+.section.tint .form-thanks{background:#fff}
+.form-thanks h3{
+  font-family:"Space Grotesk","Inter",sans-serif;font-weight:600;letter-spacing:-.01em;
+  font-size:23px;margin-bottom:10px;
+}
+.form-thanks p{color:var(--muted);font-size:15.5px}
+.form-thanks p+p{margin-top:10px}
+
+.form-noscript{
+  border:1px solid var(--sand);background:rgba(232,176,75,.12);color:#7A5310;
+  border-radius:11px;padding:14px 17px;font-size:14.5px;line-height:1.55;margin-bottom:26px;
+}
+.form-noscript a{color:#7A5310;font-weight:600;text-decoration:underline}
+
+/* "start with this package" link on a pricing card */
+.price-pick{
+  display:inline-flex;align-items:center;gap:7px;margin-top:14px;
+  font-family:"Space Grotesk","Inter",sans-serif;font-weight:600;font-size:14px;
+  color:var(--sky-dark);transition:gap .15s;
+}
+.price-pick span{transition:transform .15s}
+.price-pick:hover span{transform:translateX(3px)}
+
+@media (max-width:760px){
+  .form-card,.form-thanks{padding:26px 22px}
+}
 
 /* ---------- footer ---------- */
 .site-footer{border-top:1px solid var(--line);padding:54px 0;margin-top:10px}

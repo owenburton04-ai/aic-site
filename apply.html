@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="styles.css" />
 <script src="intro.js"></script>
 <script defer src="reveal.js"></script>
+<script defer src="forms.js"></script>
 </head>
 <body>
 
@@ -47,7 +48,7 @@
           <span class="chip">~40 researchers</span>
         </div>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#how-to-apply">See how to apply <span>→</span></a>
+          <a class="btn btn-primary" href="#application">Apply now <span>→</span></a>
           <a class="link-arrow subtle" href="research.html">See the research <span>→</span></a>
         </div>
         <a class="doc-link" href="program-overview.pdf" target="_blank" rel="noopener" style="margin-top:24px">
@@ -88,12 +89,12 @@
     <div class="wrap">
       <p class="section-kicker">Getting in</p>
       <h2 class="tracks-head">How to apply.</h2>
-      <p class="tracks-lead muted">We're looking for curiosity and follow-through, not a finance resume. Applications open <strong>mid-August 2026</strong>. To apply, email us at <a href="mailto:owenburton04@gmail.com?subject=Cohort%20%232%20interest" style="color:var(--sky-dark);font-weight:500">owenburton04@gmail.com</a>.</p>
+      <p class="tracks-lead muted">We're looking for curiosity and follow-through, not a finance resume. Reviews start when applications open in <strong>mid-August 2026</strong>, and the form below is live now, so you can get yours in early.</p>
       <ol class="steps">
         <li class="step">
           <span class="step-node">1</span>
           <h3 class="step-title">Apply</h3>
-          <p>Reach out with any questions about the internship and Cohort #2.</p>
+          <p>Fill out the form below. A few honest sentences beat a polished resume.</p>
         </li>
         <li class="step">
           <span class="step-node">2</span>
@@ -106,10 +107,6 @@
           <p>Scope your question and begin week 1.</p>
         </li>
       </ol>
-      <div class="callout">
-        <h4>Applications open mid-August 2026.</h4>
-        <p>The application link isn't live yet. Want to be first to know when it opens? Email us at <a href="mailto:owenburton04@gmail.com?subject=Cohort%20%232%20interest" style="color:var(--sky-dark);font-weight:500">owenburton04@gmail.com</a> and we'll keep you posted.</p>
-      </div>
     </div>
   </section>
 
@@ -117,9 +114,112 @@
   <section class="cta-band">
     <div class="wrap">
       <h2>Come build this with us.</h2>
-      <p>The first cohort proved the model. Cohort #2 is where it grows. If you want to learn AI first, before the rest of finance does, this is the room. Applications open mid-August 2026, reach out any time.</p>
+      <p>The first cohort proved the model. Cohort #2 is where it grows. If you want to learn AI first, before the rest of finance does, this is the room. Reviews start mid-August 2026, and you can get your application in now.</p>
       <div class="actions">
-        <a class="btn btn-light" href="mailto:owenburton04@gmail.com?subject=Cohort%20%232%20interest">Email us · owenburton04@gmail.com <span>→</span></a>
+        <a class="btn btn-light" href="#application">Apply for Cohort #2 <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section class="section tint" id="application">
+    <div class="wrap form-wrap">
+      <p class="section-kicker">Cohort #2 application</p>
+      <h2 class="tracks-head">Apply for Cohort #2.</h2>
+      <p class="form-intro">Only your name and email are required. Everything else helps us place you well, so answer what you can. We read every application ourselves.</p>
+
+      <noscript>
+        <p class="form-noscript">This form needs JavaScript to send your application, and it looks like JavaScript is turned off. Email us at <a href="mailto:owenburton04@gmail.com?subject=Cohort%20%232%20application">owenburton04@gmail.com</a> instead and we will pick it up from there.</p>
+      </noscript>
+
+      <form class="form-card" id="application-form" novalidate data-needs-js
+            data-endpoint="https://hub.appliedintelligencecollective.com/api/intake/application"
+            data-thanks="#application-thanks"
+            data-pending="Sending your application…">
+
+        <!-- Honeypot. Parked off-screen (not type=hidden), skipped by keyboard and
+             password managers, and always submitted. A value means a bot: the hub
+             returns success and quietly drops the submission. -->
+        <div class="hp" aria-hidden="true">
+          <label for="application-website-url">Website</label>
+          <input id="application-website-url" name="website_url" type="text"
+                 tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="app-name">Full name <span class="req">*</span></label>
+            <input class="input" id="app-name" name="name" type="text" required
+                   data-label="name" data-max="120" autocomplete="name"
+                   placeholder="Jordan Lee" />
+          </div>
+          <div class="field">
+            <label for="app-email">Email <span class="req">*</span></label>
+            <input class="input" id="app-email" name="email" type="email" required
+                   data-label="email" data-max="254" data-check="email" autocomplete="email"
+                   placeholder="you@school.edu" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="app-school">School <span class="hint">optional</span></label>
+            <input class="input" id="app-school" name="school" type="text"
+                   data-label="school" data-max="200" placeholder="Where you study" />
+          </div>
+          <div class="field">
+            <label for="app-year">Year <span class="hint">optional</span></label>
+            <select id="app-year" name="year" data-label="year" data-max="60">
+              <option value="">Select…</option>
+              <option>Freshman</option>
+              <option>Sophomore</option>
+              <option>Junior</option>
+              <option>Senior</option>
+              <option>Graduate student</option>
+              <option>Recent graduate</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="app-major">Major or focus <span class="hint">optional</span></label>
+          <input class="input" id="app-major" name="major" type="text"
+                 data-label="major" data-max="200" placeholder="Finance, economics, CS, or whatever you're studying" />
+        </div>
+
+        <div class="field">
+          <label for="app-why">Why do you want to join? <span class="hint">optional</span></label>
+          <textarea id="app-why" name="why_aic" data-label="answer" data-max="4000"
+                    placeholder="What draws you to AI and finance, and what would you want to research? A few sentences is plenty."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="app-ai">What's your experience with AI? <span class="hint">optional</span></label>
+          <textarea id="app-ai" name="ai_experience" data-label="answer" data-max="4000"
+                    placeholder="Tools you've used, things you've read, or just what you're curious about. No experience required, and saying so is a fine answer."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="app-linkedin">LinkedIn <span class="hint">optional</span></label>
+          <input class="input" id="app-linkedin" name="linkedin" type="url"
+                 data-label="LinkedIn" data-max="300" data-check="url"
+                 placeholder="linkedin.com/in/…" />
+        </div>
+
+        <div class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
+
+        <div class="form-submit">
+          <button class="btn btn-primary" type="submit" data-submit disabled
+                  data-busy-label="Sending…">Submit application <span>→</span></button>
+          <p class="form-fine">By applying you agree to be contacted about Applied Intelligence Collective. We don't share your information. Honest note: we're independent and new, not affiliated with any university, employer, or fund, and the internship is unpaid.</p>
+        </div>
+      </form>
+
+      <div class="form-thanks" id="application-thanks" tabindex="-1" hidden>
+        <h3>Thanks, your application is in.</h3>
+        <p>We read every one personally. Reviews start when applications open in mid-August 2026, and we'll be in touch then, so keep an eye on your inbox.</p>
+        <p>In the meantime, the <a href="research.html" style="color:var(--sky-dark);font-weight:500">research from Cohort #1</a> is the best sense of what you'd be doing.</p>
       </div>
     </div>
   </section>
