@@ -21,7 +21,7 @@
 (function () {
   'use strict';
 
-  var FALLBACK_EMAIL = 'owenburton04@gmail.com';
+  var FALLBACK_EMAIL = 'owen@appliedintelligencecollective.com';
 
   /* Matches the hub's deliberately loose check in src/lib/intake/intake.ts, so
      the client and the server agree on what counts as an email. Strict regexes

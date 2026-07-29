@@ -724,21 +724,30 @@ html.anim .stat-card,
 html.anim .price-card,
 html.anim .paper-card{opacity:0;transform:translateY(18px)}
 
-/* reveal — text / list / block elements */
-html.anim .section-kicker,
-html.anim .tracks-head,
-html.anim .tracks-lead,
-html.anim .statement,
-html.anim .who h2,
-html.anim .founders-figure,
-html.anim .founders-intro h2,
-html.anim .founders-intro p,
-html.anim .brief-card,
-html.anim .step,
-html.anim .lens-strip li,
-html.anim .checks li,
-html.anim .callout,
-html.anim .reader{
+/* reveal — text / list / block elements.
+   KEEP THE :where(). It holds this rule at `html.anim` specificity (0,1,1) so the .rv-in
+   rule below always wins. Listed plainly, any selector ending in a type (.checks li,
+   .who h2, .founders-intro p) scores 0,2,2 and OUTRANKS html.anim .rv-in at 0,2,1 — the
+   element then stays at opacity:0 forever, even after the observer marks it revealed.
+   That silently blanked the home page's "Rigor" bullets and the businesses page's
+   "In every engagement" band until 2026-07-29. Adding a target here is safe; taking the
+   :where() off is not. */
+html.anim :where(
+  .section-kicker,
+  .tracks-head,
+  .tracks-lead,
+  .statement,
+  .who h2,
+  .founders-figure,
+  .founders-intro h2,
+  .founders-intro p,
+  .brief-card,
+  .step,
+  .lens-strip li,
+  .checks li,
+  .callout,
+  .reader
+){
   opacity:0;transform:translateY(18px);
   transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1);
 }

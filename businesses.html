@@ -168,7 +168,7 @@
           <a class="price-pick" href="#inquiry" data-tier-pick="2500">Start with this <span>→</span></a>
         </div>
       </div>
-      <p class="pricing-note">Bigger company? Pick the team, not the headcount. The sizes above describe the team we research for, so a 200-person company can start with one department and scope the next team from there. Not sure which fits? Leave the package blank on the <a href="#inquiry">inquiry form</a> and we will tell you which one your questions actually need.</p>
+      <p class="pricing-note">Bigger company? Pick the team, not the headcount. The sizes above describe the team we research for, so a 200-person company can start with one department and scope the next team from there. Not sure which fits? <a href="#inquiry">Just ask</a> and we will tell you which one your questions actually need.</p>
       <p class="source-note">Comparable commercial AI readiness assessments start at roughly $2,500 to $3,500 on a one to two week turnaround, which is where our top package begins. Published pricing: <a href="https://elevate-ai.ai/blog/ai-consulting-cost" target="_blank" rel="noopener">Elevate AI</a> $3,500 and <a href="https://hivergentai.com/blog/ai-readiness-assessment-cost-small-business/" target="_blank" rel="noopener">HiVergent</a> about $2,500.</p>
     </div>
   </section>
@@ -228,102 +228,22 @@
     </div>
   </section>
 
-  <!-- INQUIRY FORM -->
+  <!-- QUESTIONS PANEL.
+       The client inquiry form used to live here, posting to the hub's
+       /api/intake/inquiry endpoint. Owen parked it 2026-07-29. The full markup is in git:
+         git show 69d4aeb:businesses.html
+       and lift the <section id="inquiry"> block back in. Nothing hub-side changed, so it
+       works as-is when it returns. NOTE: several in-page links still point at #inquiry
+       and now resolve to this panel, which is intentional. -->
   <section class="section" id="inquiry">
     <div class="wrap form-wrap">
       <p class="section-kicker">Start here</p>
       <h2 class="tracks-head">Tell us what you want to know.</h2>
-      <p class="form-intro">The question is the important part, so give it as much or as little detail as you like. We read every inquiry ourselves and reply within one business day.</p>
-
-      <noscript>
-        <p class="form-noscript">This form needs JavaScript to send your inquiry, and it looks like JavaScript is turned off. Email us at <a href="mailto:owenburton04@gmail.com?subject=AIC%20inquiry">owenburton04@gmail.com</a> instead and we will pick it up from there.</p>
-      </noscript>
-
-      <form class="form-card" id="inquiry-form" novalidate data-needs-js
-            data-endpoint="https://hub.appliedintelligencecollective.com/api/intake/inquiry"
-            data-thanks="#inquiry-thanks"
-            data-pending="Sending your inquiry…">
-
-        <!-- Honeypot. Parked off-screen (not type=hidden), skipped by keyboard and
-             password managers, and always submitted. A value means a bot: the hub
-             returns success and quietly drops the submission. -->
-        <div class="hp" aria-hidden="true">
-          <label for="inquiry-website-url">Website</label>
-          <input id="inquiry-website-url" name="website_url" type="text"
-                 tabindex="-1" autocomplete="off" />
-        </div>
-
-        <div class="form-row">
-          <div class="field">
-            <label for="inq-company">Company <span class="req">*</span></label>
-            <input class="input" id="inq-company" name="company" type="text" required
-                   data-label="company" data-max="200" autocomplete="organization"
-                   placeholder="Northgate Capital" />
-          </div>
-          <div class="field">
-            <label for="inq-name">Your name <span class="req">*</span></label>
-            <input class="input" id="inq-name" name="contact_name" type="text" required
-                   data-label="name" data-max="120" autocomplete="name"
-                   placeholder="Jordan Lee" />
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="field">
-            <label for="inq-email">Work email <span class="req">*</span></label>
-            <input class="input" id="inq-email" name="email" type="email" required
-                   data-label="email" data-max="254" data-check="email" autocomplete="email"
-                   placeholder="you@company.com" />
-          </div>
-          <div class="field">
-            <label for="inq-phone">Phone <span class="hint">optional</span></label>
-            <input class="input" id="inq-phone" name="phone" type="tel"
-                   data-label="phone" data-max="40" autocomplete="tel"
-                   placeholder="(555) 010-2200" />
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="inq-tier">Package you have in mind <span class="hint">optional</span></label>
-          <select id="inq-tier" name="tier_interest" data-number data-label="package">
-            <option value="">Not sure yet</option>
-            <option value="500">$500 · Scan</option>
-            <option value="1000">$1,000 · Discovery</option>
-            <option value="2500">$2,500 · Diagnostic</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="inq-question">What do you want to know about AI in your industry? <span class="hint">optional, but the most useful thing you can tell us</span></label>
-          <textarea id="inq-question" name="question" data-label="question" data-max="4000"
-                    placeholder="For example: which parts of our diligence process are firms like ours actually automating with AI, and what is still not worth it? A rough question is fine, we help sharpen it."></textarea>
-        </div>
-
-        <div class="field">
-          <label for="inq-message">Anything else we should know? <span class="hint">optional</span></label>
-          <textarea id="inq-message" name="message" data-label="message" data-max="4000"
-                    placeholder="Timing, team size, a deadline you're working toward, or anything that shapes the work."></textarea>
-        </div>
-
-        <div class="field">
-          <label for="inq-source">How did you hear about us? <span class="hint">optional</span></label>
-          <input class="input" id="inq-source" name="source" type="text"
-                 data-label="source" data-max="200" placeholder="LinkedIn, a referral, a conversation…" />
-        </div>
-
-        <div class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
-
-        <div class="form-submit">
-          <button class="btn btn-primary" type="submit" data-submit disabled
-                  data-busy-label="Sending…">Send inquiry <span>→</span></button>
-          <p class="form-fine">We reply within one business day. Nothing you send here is shared outside AIC. Prefer email? Write to <a href="mailto:owenburton04@gmail.com?subject=AIC%20inquiry">owenburton04@gmail.com</a>.</p>
-        </div>
-      </form>
-
-      <div class="form-thanks" id="inquiry-thanks" tabindex="-1" hidden>
-        <h3>Thanks, that's in.</h3>
-        <p>Your inquiry landed with us and we'll reply within one business day, so keep an eye on your inbox.</p>
-        <p>If your questions shift in the meantime, just reply to our email and we'll rescope it.</p>
+      <p class="form-intro">The questions are the important part, so give them as much or as little detail as you like. Owen reads every message himself and replies within one business day.</p>
+      <div class="form-thanks">
+        <h3>Email Owen Burton</h3>
+        <p><a href="mailto:owen@appliedintelligencecollective.com?subject=AIC%20inquiry" style="color:var(--sky-dark);font-weight:600">owen@appliedintelligencecollective.com</a></p>
+        <p>Tell us your company, the corner of the business where AI feels most uncertain, and what you're hoping to get out of it. A rough question is fine, we help sharpen it. Nothing you send is shared outside AIC.</p>
       </div>
     </div>
   </section>
