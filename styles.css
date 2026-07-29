@@ -239,9 +239,16 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
 .section.center{text-align:center}
 .section.center .tracks-head,
 .section.center .tracks-lead{margin-left:auto;margin-right:auto}
-.section.center .checks{max-width:600px;margin-left:auto;margin-right:auto;text-align:left}
+/* In a centered band the list follows the lead paragraph in one column, so it needs
+   its own breathing room above (inside .who it is a separate grid column and must NOT
+   get this, or it drops out of line with the heading). */
+.section.center .checks{max-width:600px;margin:26px auto 0;text-align:left}
 .section.center .hero-actions{justify-content:center}
 .section.compact{padding:46px 0}
+/* A band that ends in a list already carries its own bottom rhythm (the last row's
+   line-height), so a full pad under it reads as a pool of empty tint. Pair the trimmed
+   foot with the list's margin-top above so the band sits balanced, not cramped. */
+.section.tight-foot{padding-bottom:26px}
 .pricing-note{text-align:center;color:var(--muted);font-size:15px;margin-top:26px}
 .pricing-note a{color:var(--sky-dark);font-weight:500}
 
@@ -497,7 +504,7 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
 .stat-label{color:var(--muted);font-size:14.5px;margin-top:12px;line-height:1.5}
 
 /* pricing tiers */
-.price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
 .price-card{
   background:#fff;border:1px solid var(--line);border-radius:14px;
   padding:26px 22px;display:flex;flex-direction:column;position:relative;
@@ -514,10 +521,15 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
 .price-amt{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:34px;
   letter-spacing:-.02em;color:var(--graphite);padding-bottom:16px;
   border-bottom:1px solid var(--line);margin-bottom:16px}
+/* team-size + turnaround guide, between the price and the description */
+.price-meta{font-family:"Space Grotesk","Inter",sans-serif;font-size:12.5px;font-weight:600;
+  color:var(--sky-dark);margin-bottom:10px}
 .price-desc{color:var(--muted);font-size:14px;line-height:1.55}
-/* the $500 Starter tier is a live CTA (starts the founding pilot) */
+/* descriptions run to different lengths, so let them absorb the slack and keep
+   every card's "start with this" link on the same baseline */
+.price-card .price-desc{flex:1}
+.price-card .price-pick{margin-top:18px}
 .price-cta{cursor:pointer}
-.price-cta .price-desc{flex:1}
 .price-tag-sky{background:var(--sky);color:#fff}
 .price-card-go{margin-top:16px;font-size:14px}
 .price-cta:hover{border-color:var(--sky)}
@@ -739,7 +751,8 @@ html.anim .step.rv-in::after{transform:scaleX(1)}
 
 /* ---------- responsive ---------- */
 @media (max-width:960px){
-  .price-grid{grid-template-columns:repeat(2,1fr);gap:16px 16px}
+  /* three packages: a 2-up grid would orphan the third card on its own row */
+  .price-grid{grid-template-columns:1fr;gap:20px}
 }
 @media (max-width:760px){
   body{font-size:16px}
