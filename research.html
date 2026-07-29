@@ -50,7 +50,7 @@
           <div><dt>First briefs</dt><dd>Live now</dd></div>
         </dl>
         <div class="panel-meta">
-          <span>Independent · Student-founded</span>
+          <span>Published as we go</span>
           <span class="clock" data-clock>·</span>
         </div>
       </aside>
@@ -99,7 +99,7 @@
       <span class="mark" aria-hidden="true">[<span>AI</span>]</span>
       Applied Intelligence Collective
     </div>
-    <p class="footer-note">An independent, student-founded research collective. Not affiliated with any university, employer, or fund.</p>
+    <p class="footer-note">Not affiliated with any university, employer, or fund.</p>
     <div class="footer-meta">
       <nav class="footer-nav">
         <a href="index.html">Home</a>
@@ -145,7 +145,15 @@
         (b.sourcesNote ? '<p class="card-sources">' + esc(b.sourcesNote) + '</p>' : '');
     }
 
-    function selectIndex(i, scroll) {
+    /* Two shapes for the same data. DESKTOP is a reading room: a scrolling list beside a
+       pinned detail pane. MOBILE is an accordion: the detail pane is hidden and each brief
+       expands inline under its own title, collapsed by default. Stacking the full list AND a
+       full expanded brief (what this used to do) made the phone page endless to scroll. */
+    var mq = window.matchMedia("(max-width:760px)");
+    function isMobile() { return mq.matches; }
+
+    /* --- desktop: swap the pinned pane --- */
+    function selectIndex(i) {
       Array.prototype.forEach.call(listEl.querySelectorAll(".reader-item"), function (el) {
         el.classList.toggle("active", +el.dataset.index === i);
       });
@@ -154,30 +162,66 @@
         detailEl.innerHTML = detailHTML(briefs[i]);
         detailEl.scrollTop = 0;               // start each brief at the top of the pane
         detailEl.style.opacity = "1";
-        if (scroll && window.matchMedia("(max-width:760px)").matches) {
-          detailEl.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
       }, 120);
     }
 
+    /* --- mobile: expand one brief inline, collapse the rest --- */
+    function toggleAccordion(btn) {
+      var panel = document.getElementById(btn.getAttribute("aria-controls"));
+      var open = btn.getAttribute("aria-expanded") === "true";
+      Array.prototype.forEach.call(listEl.querySelectorAll(".reader-item"), function (el) {
+        if (el === btn) return;
+        el.setAttribute("aria-expanded", "false");
+        el.classList.remove("active");
+        var p = document.getElementById(el.getAttribute("aria-controls"));
+        if (p) p.hidden = true;
+      });
+      btn.setAttribute("aria-expanded", open ? "false" : "true");
+      btn.classList.toggle("active", !open);
+      if (panel) {
+        if (open) { panel.hidden = true; }
+        else {
+          if (!panel.innerHTML) panel.innerHTML = detailHTML(briefs[+btn.dataset.index]);
+          panel.hidden = false;
+        }
+      }
+    }
+
     function renderList() {
+      var mobile = isMobile();
       var html = "";
       briefs.forEach(function (b, i) {
         if (activeFilter !== "All" && b.group !== activeFilter) return;
-        html += '<button type="button" class="reader-item" data-index="' + i + '">' +
+        html += '<button type="button" class="reader-item" data-index="' + i + '"' +
+          (mobile ? ' aria-expanded="false" aria-controls="brief-panel-' + i + '"' : '') + '>' +
           '<span class="takeaway-tag ri-tag">' + esc(b.takeaway || "") + '</span>' +
           '<span class="ri-title">' + esc(b.title) + '</span>' +
           '<span class="ri-meta">' + esc(b.author) + (b.group ? " · " + esc(b.group) : "") + '</span>' +
           '</button>';
+        if (mobile) {
+          html += '<div class="reader-panel" id="brief-panel-' + i + '" hidden></div>';
+        }
       });
       listEl.innerHTML = html;
       listEl.scrollTop = 0;                    // back to the top when the track changes
+      detailEl.hidden = mobile;                // no pinned pane on a phone
+
       Array.prototype.forEach.call(listEl.querySelectorAll(".reader-item"), function (el) {
-        el.addEventListener("click", function () { selectIndex(+el.dataset.index, true); });
+        el.addEventListener("click", function () {
+          if (isMobile()) toggleAccordion(el);
+          else selectIndex(+el.dataset.index);
+        });
       });
+
       var first = listEl.querySelector(".reader-item");
-      if (first) { selectIndex(+first.dataset.index, false); }
-      else { detailEl.innerHTML = '<p class="card-body">No briefs in this track yet.</p>'; }
+      if (!first) {
+        detailEl.hidden = false;
+        detailEl.innerHTML = '<p class="card-body">No briefs in this track yet.</p>';
+      } else if (!mobile) {
+        selectIndex(+first.dataset.index);     // desktop opens on the newest brief
+      }
+      /* On mobile nothing is expanded on load, which is the whole point: the visitor sees a
+         scannable list of titles instead of a list plus a full article. */
     }
 
     function renderFilters() {
@@ -203,6 +247,11 @@
       if (briefs.length) {
         renderFilters();
         renderList();
+        /* Rebuild when the viewport crosses the breakpoint (rotation, or a resized desktop
+           window), so the markup always matches the mode it is being styled for. */
+        var onModeChange = function () { renderList(); };
+        if (mq.addEventListener) mq.addEventListener("change", onModeChange);
+        else if (mq.addListener) mq.addListener(onModeChange);   // older Safari
       } else {
         filtersEl.style.display = "none";
         detailEl.style.display = "none";

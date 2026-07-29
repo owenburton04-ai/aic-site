@@ -31,6 +31,10 @@ body{
 }
 ::selection{background:var(--sky);color:#fff}
 a{color:inherit;text-decoration:none}
+/* owen@appliedintelligencecollective.com is a 38-character unbreakable token, so it blows out
+   any container narrower than about 340px. Since the forms were parked these addresses are the
+   primary call to action, so let them break rather than overflow the page. */
+a[href^="mailto:"]{overflow-wrap:anywhere}
 img{max-width:100%;display:block}
 
 h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
@@ -234,6 +238,12 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
 .checks{list-style:none;display:flex;flex-direction:column;gap:16px}
 .checks li{display:grid;grid-template-columns:24px 1fr;gap:12px;color:var(--graphite)}
 .checks li::before{content:"→";color:var(--sky);font-weight:700}
+/* Two-across variant for a longer list under a full-width heading (the businesses page's
+   "In every engagement" band). Six items in one column reads as a wall; two columns fill
+   the width the heading already occupies. Must stay AFTER .checks — same specificity, so
+   source order is the only thing letting display:grid beat .checks' display:flex. */
+.checks-2up{display:grid;grid-template-columns:1fr 1fr;gap:18px 44px;margin-top:34px}
+@media (max-width:760px){.checks-2up{grid-template-columns:1fr;gap:16px;margin-top:26px}}
 
 /* centered section variant — centers kicker/head/lead (+ optional checks) */
 .section.center{text-align:center}
@@ -342,7 +352,9 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
 .cta-band h2{font-family:"Space Grotesk",sans-serif;font-weight:600;
   font-size:clamp(28px,4vw,46px);letter-spacing:-.02em;line-height:1.1;max-width:760px}
 .cta-band p{color:#A9B7C2;margin-top:16px;max-width:560px}
-.cta-band .actions{margin-top:34px}
+.cta-band .actions{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px 18px;align-items:center}
+.cta-band .actions .link-arrow{color:#fff}
+.cta-band .actions .link-arrow:hover{color:var(--mist)}
 .cta-band .mark span{color:var(--sky)}
 .cta-band.center{text-align:center}
 .cta-band.center h2,.cta-band.center p{margin-left:auto;margin-right:auto}
@@ -450,7 +462,8 @@ textarea[aria-invalid="true"]:focus{box-shadow:0 0 0 3px var(--alert-tint)}
 .footer-meta{display:flex;flex-wrap:wrap;align-items:center;gap:22px;
   padding-top:18px;border-top:1px solid var(--line);
   color:var(--faint);font-size:13px}
-.footer-nav{display:flex;gap:20px;margin-right:auto}
+/* wrap: five links plus 20px gaps overflow a 320px viewport otherwise */
+.footer-nav{display:flex;flex-wrap:wrap;gap:12px 20px;margin-right:auto}
 .footer-nav a{color:var(--muted);transition:color .15s}
 .footer-nav a:hover{color:var(--graphite)}
 
@@ -472,8 +485,13 @@ textarea[aria-invalid="true"]:focus{box-shadow:0 0 0 3px var(--alert-tint)}
   background:rgba(232,176,75,.12);vertical-align:middle;
 }
 h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
-.source-note{color:var(--faint);font-size:12.5px;margin-top:16px;display:flex;
-  flex-wrap:wrap;align-items:center;gap:8px}
+/* Runs as prose, not flex. As a flex container every inline <em>/<a> became a flex item with
+   an 8px gap, which broke word spacing mid-sentence once these notes grew past a few words. */
+.source-note{color:var(--faint);font-size:12.5px;line-height:1.55;margin-top:16px;max-width:860px}
+.source-note em{font-style:italic}
+.source-note a{color:var(--muted);text-decoration:underline;text-decoration-color:var(--line-strong,#CFDBE6);
+  text-underline-offset:2px}
+.source-note a:hover{color:var(--sky-dark)}
 
 /* numbered feature cards (2-up / 3-up) */
 .feature-grid{display:grid;gap:18px;margin-top:38px}
@@ -703,6 +721,31 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
 .reader-detail .card-meta{margin-top:2px}
 .reader-detail .card-sources{margin-top:14px}
 
+/* Mobile accordion panel: the brief body expanded inline under its own title. Only rendered
+   at <=760px (see the reader script), so it needs no media query of its own. Tucks under the
+   button it belongs to, sharing its left edge and losing the top corners so the two read as
+   one card. The open button keeps .active, which supplies the sky border above. */
+.reader-panel{
+  background:#fff;border:1px solid var(--line);border-top:0;
+  border-radius:0 0 12px 12px;padding:2px 18px 18px;margin:-12px 0 4px;
+}
+.reader-panel .card-body{font-size:15px;margin-top:0}
+.reader-panel .card-sources{margin-top:12px}
+/* The button directly above already shows the tag, date, title and byline, so the panel
+   carries only the part you tapped for: the body and its sources. */
+.reader-panel .card-top,
+.reader-panel h3,
+.reader-panel .card-meta{display:none}
+.reader-item[aria-expanded="true"]{border-bottom-left-radius:0;border-bottom-right-radius:0}
+/* affordance that the row opens */
+.reader-item[aria-expanded]{position:relative;padding-right:44px}
+.reader-item[aria-expanded]::after{
+  content:"";position:absolute;right:20px;top:24px;width:8px;height:8px;
+  border-right:2px solid var(--sky);border-bottom:2px solid var(--sky);
+  transform:rotate(45deg);transition:transform .2s ease;
+}
+.reader-item[aria-expanded="true"]::after{transform:rotate(-135deg)}
+
 /* ---------- scroll reveal + card polish ---------- */
 /* Progressive: the hidden state is gated on html.anim, which reveal.js's inline
    head marker sets synchronously (and never sets under prefers-reduced-motion),
@@ -771,10 +814,17 @@ html.anim .step.rv-in::after{transform:scaleX(1)}
   .nav a{letter-spacing:0}
   /* 5-item nav no longer fits one row: brand on top, nav wraps below.
      Keep the .wrap side padding (only override vertical) so nothing hugs the edge. */
-  .header-inner{flex-wrap:wrap;height:auto;padding-block:12px;row-gap:12px}
+  .header-inner{flex-wrap:wrap;height:auto;padding-block:12px;row-gap:12px;position:relative}
   .nav{width:100%;gap:14px 18px;flex-wrap:wrap;justify-content:flex-start;align-items:center}
   .nav a{font-size:13px}
-  .nav .nav-apply{margin-left:auto;padding:8px 16px}
+  /* At <=414px the four text links fill their whole row, so an in-flow Apply button wrapped
+     to a THIRD row and margin-left:auto shoved it to the far edge, growing the sticky header
+     to 148px. .brand-name is hidden at this width, so the brand row is just the [AI] mark and
+     ~300px of dead space: park Apply there instead. Row 1 = mark + Apply, row 2 = the four
+     links, header back to ~112px. Keep `right` equal to the mobile .wrap padding so the button
+     lines up with the content edge. DOM order is untouched, so Apply stays inside the nav
+     landmark for screen readers. */
+  .nav .nav-apply{position:absolute;top:12px;right:22px;margin-left:0;padding:8px 16px}
   .hero{padding:56px 0 50px}
   .hero-home{padding:66px 0 58px}
   .hero-grid{grid-template-columns:1fr;gap:34px}
@@ -794,4 +844,10 @@ html.anim .step.rv-in::after{transform:scaleX(1)}
   .step{padding-top:0;padding-left:52px;min-height:38px}
   .step::after{display:none}
   .path-grid{grid-template-columns:1fr}
+}
+/* Very narrow (iPhone SE and similar). MUST stay its own block after the 760px one, not nested
+   inside it: at 13px/18px the four nav links need two rows and About lands alone on a third. */
+@media (max-width:380px){
+  .nav{gap:12px 11px}
+  .nav a{font-size:12px}
 }
