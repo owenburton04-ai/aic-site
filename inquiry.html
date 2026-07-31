@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Start an inquiry · Applied Intelligence Collective</title>
+<meta name="description" content="Tell us what you want to know about AI in your business. We read every inquiry ourselves and reply within one business day." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim')}catch(e){}</script>
+<link rel="stylesheet" href="styles.css" />
+<script src="intro.js"></script>
+<script defer src="reveal.js"></script>
+<script defer src="forms.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Applied Intelligence Collective home">
+      <span class="mark" aria-hidden="true">[<span>AI</span>]</span>
+      <span class="brand-name">Applied Intelligence Collective</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="businesses.html">For Businesses</a>
+      <a href="about.html">About</a>
+      <a class="nav-apply" href="apply.html">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- INQUIRY FORM -->
+  <section class="section tint" id="inquiry">
+    <div class="wrap form-wrap">
+      <p class="section-kicker">Start here</p>
+      <h2 class="tracks-head">Tell us what you want to know.</h2>
+      <p class="form-intro">The question is the important part, so give it as much or as little detail as you like. We read every inquiry ourselves and reply within one business day. Not sure what an engagement looks like? <a href="businesses.html" style="color:var(--sky-dark);font-weight:500">See how we work and the packages</a>.</p>
+
+      <noscript>
+        <p class="form-noscript">This form needs JavaScript to send your inquiry, and it looks like JavaScript is turned off. Email us at <a href="mailto:owen@appliedintelligencecollective.com?subject=AIC%20inquiry">owen@appliedintelligencecollective.com</a> instead and we will pick it up from there.</p>
+      </noscript>
+
+      <form class="form-card" id="inquiry-form" novalidate data-needs-js
+            data-endpoint="https://hub.appliedintelligencecollective.com/api/intake/inquiry"
+            data-thanks="#inquiry-thanks"
+            data-pending="Sending your inquiry…">
+
+        <!-- Honeypot. Parked off-screen (not type=hidden), skipped by keyboard and
+             password managers, and always submitted. A value means a bot: the hub
+             returns success and quietly drops the submission. -->
+        <div class="hp" aria-hidden="true">
+          <label for="inquiry-website-url">Website</label>
+          <input id="inquiry-website-url" name="website_url" type="text"
+                 tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="inq-company">Company <span class="req">*</span></label>
+            <input class="input" id="inq-company" name="company" type="text" required
+                   data-label="company" data-max="200" autocomplete="organization"
+                   placeholder="Northgate Capital" />
+          </div>
+          <div class="field">
+            <label for="inq-name">Your name <span class="req">*</span></label>
+            <input class="input" id="inq-name" name="contact_name" type="text" required
+                   data-label="name" data-max="120" autocomplete="name"
+                   placeholder="Jordan Lee" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="inq-email">Work email <span class="req">*</span></label>
+            <input class="input" id="inq-email" name="email" type="email" required
+                   data-label="email" data-max="254" data-check="email" autocomplete="email"
+                   placeholder="you@company.com" />
+          </div>
+          <div class="field">
+            <label for="inq-phone">Phone <span class="hint">optional</span></label>
+            <input class="input" id="inq-phone" name="phone" type="tel"
+                   data-label="phone" data-max="40" autocomplete="tel"
+                   placeholder="(555) 010-2200" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="inq-tier">Package you have in mind <span class="hint">optional</span></label>
+          <select id="inq-tier" name="tier_interest" data-number data-label="package">
+            <option value="">Not sure yet</option>
+            <option value="500">$500 · Scan</option>
+            <option value="1000">$1,000 · Discovery</option>
+            <option value="2500">$2,500 · Diagnostic</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="inq-question">What do you want to know about AI in your industry? <span class="hint">optional, but the most useful thing you can tell us</span></label>
+          <textarea id="inq-question" name="question" data-label="question" data-max="4000"
+                    placeholder="For example: which parts of our diligence process are firms like ours actually automating with AI, and what is still not worth it? A rough question is fine, we help sharpen it."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="inq-message">Anything else we should know? <span class="hint">optional</span></label>
+          <textarea id="inq-message" name="message" data-label="message" data-max="4000"
+                    placeholder="Timing, team size, a deadline you're working toward, or anything that shapes the work."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="inq-source">How did you hear about us? <span class="hint">optional</span></label>
+          <input class="input" id="inq-source" name="source" type="text"
+                 data-label="source" data-max="200" placeholder="LinkedIn, a referral, a conversation…" />
+        </div>
+
+        <div class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
+
+        <div class="form-submit">
+          <button class="btn btn-primary" type="submit" data-submit disabled
+                  data-busy-label="Sending…">Send inquiry <span>→</span></button>
+          <p class="form-fine">We reply within one business day. Nothing you send here is shared outside AIC. Prefer email? Write to <a href="mailto:owen@appliedintelligencecollective.com?subject=AIC%20inquiry">owen@appliedintelligencecollective.com</a>.</p>
+        </div>
+      </form>
+
+      <div class="form-thanks" id="inquiry-thanks" tabindex="-1" hidden>
+        <h3>Thanks, that's in.</h3>
+        <p>Your inquiry landed with us and we'll reply within one business day, so keep an eye on your inbox.</p>
+        <p>If your questions shift in the meantime, just reply to our email and we'll rescope it.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="mark" aria-hidden="true">[<span>AI</span>]</span>
+      Applied Intelligence Collective
+    </div>
+    <p class="footer-note">Not affiliated with any university, employer, or fund.</p>
+    <div class="footer-meta">
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="businesses.html">For Businesses</a>
+        <a href="about.html">About</a>
+        <a href="apply.html">Apply</a>
+      </nav>
+      <span class="clock" data-clock>·</span>
+      <span>© 2026 Applied Intelligence Collective</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    function tick() {
+      try {
+        var fmt = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'America/Denver', weekday: 'short', month: 'short',
+          day: 'numeric', hour: 'numeric', minute: '2-digit'
+        });
+        var s = fmt.format(new Date()) + ' MT';
+        document.querySelectorAll('[data-clock]').forEach(function (el) { el.textContent = s; });
+      } catch (e) {}
+    }
+    tick();
+    setInterval(tick, 30000);
+  })();
+</script>
+</body>
+</html>

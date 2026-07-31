@@ -254,13 +254,14 @@
   function init() {
     document.querySelectorAll('form[data-endpoint]').forEach(wire);
 
-    /* Pricing cards jump to the form with that package already selected. */
-    document.querySelectorAll('[data-tier-pick]').forEach(function (link) {
-      link.addEventListener('click', function () {
-        var select = document.querySelector('select[name="tier_interest"]');
-        if (select) select.value = link.getAttribute('data-tier-pick');
-      });
-    });
+    /* Pricing cards link to inquiry.html?tier=500|1000|2500; preselect that package.
+       Only values that match an existing <option> take, so junk params are ignored. */
+    var tier = new URLSearchParams(window.location.search).get('tier');
+    var tierSelect = document.querySelector('select[name="tier_interest"]');
+    if (tier && tierSelect &&
+        tierSelect.querySelector('option[value="' + tier.replace(/[^0-9]/g, '') + '"]')) {
+      tierSelect.value = tier.replace(/[^0-9]/g, '');
+    }
   }
 
   if (document.readyState === 'loading') {

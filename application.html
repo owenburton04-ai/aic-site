@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Apply for Cohort #2 · Applied Intelligence Collective</title>
+<meta name="description" content="Apply for Cohort #2 of the Applied Intelligence Collective research internship. Only your name and email are required, and we read every application ourselves." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<script>try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('anim')}catch(e){}</script>
+<link rel="stylesheet" href="styles.css" />
+<script src="intro.js"></script>
+<script defer src="reveal.js"></script>
+<script defer src="forms.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Applied Intelligence Collective home">
+      <span class="mark" aria-hidden="true">[<span>AI</span>]</span>
+      <span class="brand-name">Applied Intelligence Collective</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="businesses.html">For Businesses</a>
+      <a href="about.html">About</a>
+      <a class="nav-apply" href="apply.html">Apply</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- APPLICATION FORM -->
+  <section class="section tint" id="application">
+    <div class="wrap form-wrap">
+      <p class="section-kicker">Cohort #2 application</p>
+      <h2 class="tracks-head">Apply for Cohort #2.</h2>
+      <p class="form-intro">Only your name and email are required. Everything else helps us place you well, so answer what you can. We read every application ourselves. New here? <a href="apply.html" style="color:var(--sky-dark);font-weight:500">Start with what the internship is</a>.</p>
+
+      <noscript>
+        <p class="form-noscript">This form needs JavaScript to send your application, and it looks like JavaScript is turned off. Email us at <a href="mailto:owen@appliedintelligencecollective.com?subject=Cohort%20%232%20application">owen@appliedintelligencecollective.com</a> instead and we will pick it up from there.</p>
+      </noscript>
+
+      <form class="form-card" id="application-form" novalidate data-needs-js
+            data-endpoint="https://hub.appliedintelligencecollective.com/api/intake/application"
+            data-thanks="#application-thanks"
+            data-pending="Sending your application…">
+
+        <!-- Honeypot. Parked off-screen (not type=hidden), skipped by keyboard and
+             password managers, and always submitted. A value means a bot: the hub
+             returns success and quietly drops the submission. -->
+        <div class="hp" aria-hidden="true">
+          <label for="application-website-url">Website</label>
+          <input id="application-website-url" name="website_url" type="text"
+                 tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="app-name">Full name <span class="req">*</span></label>
+            <input class="input" id="app-name" name="name" type="text" required
+                   data-label="name" data-max="120" autocomplete="name"
+                   placeholder="Jordan Lee" />
+          </div>
+          <div class="field">
+            <label for="app-email">Email <span class="req">*</span></label>
+            <input class="input" id="app-email" name="email" type="email" required
+                   data-label="email" data-max="254" data-check="email" autocomplete="email"
+                   placeholder="you@school.edu" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label for="app-school">School <span class="hint">optional</span></label>
+            <input class="input" id="app-school" name="school" type="text"
+                   data-label="school" data-max="200" placeholder="Where you study" />
+          </div>
+          <div class="field">
+            <label for="app-year">Year <span class="hint">optional</span></label>
+            <select id="app-year" name="year" data-label="year" data-max="60">
+              <option value="">Select…</option>
+              <option>Freshman</option>
+              <option>Sophomore</option>
+              <option>Junior</option>
+              <option>Senior</option>
+              <option>Graduate student</option>
+              <option>Recent graduate</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="app-major">Major or focus <span class="hint">optional</span></label>
+          <input class="input" id="app-major" name="major" type="text"
+                 data-label="major" data-max="200" placeholder="Finance, marketing, information systems, or whatever you're studying" />
+        </div>
+
+        <div class="field">
+          <label for="app-why">Why do you want to join? <span class="hint">optional</span></label>
+          <textarea id="app-why" name="why_aic" data-label="answer" data-max="4000"
+                    placeholder="What draws you to AI and the work you're headed into, and what would you want to research? A few sentences is plenty."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="app-ai">What's your experience with AI? <span class="hint">optional</span></label>
+          <textarea id="app-ai" name="ai_experience" data-label="answer" data-max="4000"
+                    placeholder="Tools you've used, things you've read, or just what you're curious about. No experience required, and saying so is a fine answer."></textarea>
+        </div>
+
+        <div class="field">
+          <label for="app-linkedin">LinkedIn <span class="hint">optional</span></label>
+          <input class="input" id="app-linkedin" name="linkedin" type="url"
+                 data-label="LinkedIn" data-max="300" data-check="url"
+                 placeholder="linkedin.com/in/…" />
+        </div>
+
+        <div class="form-status" data-form-status role="status" aria-live="polite" hidden></div>
+
+        <div class="form-submit">
+          <button class="btn btn-primary" type="submit" data-submit disabled
+                  data-busy-label="Sending…">Submit application <span>→</span></button>
+          <p class="form-fine">By applying you agree to be contacted about Applied Intelligence Collective. We don't share your information. One thing to know up front: the internship is unpaid.</p>
+        </div>
+      </form>
+
+      <div class="form-thanks" id="application-thanks" tabindex="-1" hidden>
+        <h3>Thanks, your application is in.</h3>
+        <p>We read every one personally and review applications as they come in, so keep an eye on your inbox.</p>
+        <p>In the meantime, the <a href="research.html" style="color:var(--sky-dark);font-weight:500">research from Cohort #1</a> is the best sense of what you'd be doing.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="mark" aria-hidden="true">[<span>AI</span>]</span>
+      Applied Intelligence Collective
+    </div>
+    <p class="footer-note">Not affiliated with any university, employer, or fund.</p>
+    <div class="footer-meta">
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="businesses.html">For Businesses</a>
+        <a href="about.html">About</a>
+        <a href="apply.html">Apply</a>
+      </nav>
+      <span class="clock" data-clock>·</span>
+      <span>© 2026 Applied Intelligence Collective</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    function tick() {
+      try {
+        var fmt = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'America/Denver', weekday: 'short', month: 'short',
+          day: 'numeric', hour: 'numeric', minute: '2-digit'
+        });
+        var s = fmt.format(new Date()) + ' MT';
+        document.querySelectorAll('[data-clock]').forEach(function (el) { el.textContent = s; });
+      } catch (e) {}
+    }
+    tick();
+    setInterval(tick, 30000);
+  })();
+</script>
+</body>
+</html>
