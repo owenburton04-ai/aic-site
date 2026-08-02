@@ -521,31 +521,36 @@ textarea[aria-invalid="true"]:focus{box-shadow:0 0 0 3px var(--alert-tint)}
 }
 
 /* ---------- footer ---------- */
-.site-footer{border-top:1px solid var(--line);padding:30px 0 54px;margin-top:10px}
-/* the brand ridge, closing every page. A flow element (not pinned) so it can
-   never overlap the footer text, and width:100% (never 100vw) so it can never
-   cause horizontal overflow.
-   It is STROKE-ONLY line art matching the home hero's scene (same sky palette,
-   same round caps, open polylines, no fills). A filled/layered version shipped
-   briefly and Owen asked for lines instead, so don't reintroduce fills.
-   The viewBox is 1440x170 and the height tops out at 170px, so at desktop width
-   the artwork maps ~1:1 and the peaks keep their real slope. Do NOT restore a
-   tall viewBox: squashed into a short band it flattens every summit into a
-   sawtooth, which is what made the very first version look weak.
-   Regenerate on all 8 pages via /AIC Website/Scripts/apply_ridge.py. */
-.footer-ridge{display:block;width:100%;height:clamp(96px,12vw,170px);
-  pointer-events:none;margin-bottom:30px}
+/* The footer is a solid SKY block, Owen's call 2026-08-01: he wanted the bottom
+   of every page to "stick out more", using the same blue as the front-page
+   mountains (--sky #5C9CE0). The mountain ridge that used to live here is gone.
+   *** TEXT IS GRAPHITE, NOT WHITE, AND THAT IS NOT A STYLE CHOICE. ***
+   Measured against #5C9CE0: graphite #1E2A33 is 5.08:1 (passes WCAG AA), white
+   is 2.88:1 (fails badly for 13-14.5px text). Do not "fix" this to white.
+   Do not soften these greys with alpha either: the first attempt used
+   rgba(30,42,51,.82) and .72, which measure 3.08:1 and 2.28:1 and FAIL. Nothing
+   here goes below .96 alpha (4.77:1). Hierarchy comes from size and weight, not
+   from fading the text, because on a mid-tone ground fading it breaks legibility.
+   To use lighter text you would have to darken the blue, which is not the blue
+   Owen asked for. */
+.site-footer{background:var(--sky);color:var(--graphite);padding:52px 0 46px;margin-top:0}
 .footer-inner{display:flex;flex-direction:column;gap:20px}
 .footer-brand{display:flex;align-items:center;gap:11px;font-family:"Space Grotesk",sans-serif;
   font-weight:600;color:var(--graphite)}
-.footer-note{color:var(--muted);font-size:14.5px;max-width:560px}
+/* the wordmark's [AI] accent is Sky, which is invisible on a Sky ground */
+.site-footer .mark{color:var(--graphite)}
+.site-footer .mark span{color:#fff}
+.footer-note{color:var(--graphite);font-size:14.5px;max-width:560px}
 .footer-meta{display:flex;flex-wrap:wrap;align-items:center;gap:22px;
-  padding-top:18px;border-top:1px solid var(--line);
-  color:var(--faint);font-size:13px}
+  padding-top:18px;border-top:1px solid rgba(30,42,51,.22);
+  color:rgba(30,42,51,.96);font-size:13px}
 /* wrap: five links plus 20px gaps overflow a 320px viewport otherwise */
 .footer-nav{display:flex;flex-wrap:wrap;gap:12px 20px;margin-right:auto}
-.footer-nav a{color:var(--muted);transition:color .15s}
-.footer-nav a:hover{color:var(--graphite)}
+/* hover is an underline, not a colour shift: every colour light enough to read
+   as "brighter" than graphite on this ground fails contrast */
+.footer-nav a{color:var(--graphite);transition:text-decoration-color .15s;
+  text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px}
+.footer-nav a:hover{text-decoration-color:currentColor}
 
 /* ---------- pivot components (businesses + cohort #2) ---------- */
 
@@ -984,5 +989,5 @@ html.anim .status-card.rv-in .status-rule i{transform:scaleX(1)}
   .status-grid{grid-template-columns:1fr;gap:14px}
   .flip-card{min-height:170px}
   .rigor-grid{grid-template-columns:1fr}
-  .footer-ridge{margin-bottom:26px}
+  .site-footer{padding:40px 0 38px}
 }
