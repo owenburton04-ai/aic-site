@@ -521,36 +521,27 @@ textarea[aria-invalid="true"]:focus{box-shadow:0 0 0 3px var(--alert-tint)}
 }
 
 /* ---------- footer ---------- */
-/* The footer is a solid SKY block, Owen's call 2026-08-01: he wanted the bottom
-   of every page to "stick out more", using the same blue as the front-page
-   mountains (--sky #5C9CE0). The mountain ridge that used to live here is gone.
-   *** TEXT IS GRAPHITE, NOT WHITE, AND THAT IS NOT A STYLE CHOICE. ***
-   Measured against #5C9CE0: graphite #1E2A33 is 5.08:1 (passes WCAG AA), white
-   is 2.88:1 (fails badly for 13-14.5px text). Do not "fix" this to white.
-   Do not soften these greys with alpha either: the first attempt used
-   rgba(30,42,51,.82) and .72, which measure 3.08:1 and 2.28:1 and FAIL. Nothing
-   here goes below .96 alpha (4.77:1). Hierarchy comes from size and weight, not
-   from fading the text, because on a mid-tone ground fading it breaks legibility.
-   To use lighter text you would have to darken the blue, which is not the blue
-   Owen asked for. */
-.site-footer{background:var(--sky);color:var(--graphite);padding:52px 0 46px;margin-top:0}
+/* Graphite block at the very bottom of every page, Owen's call 2026-08-01. The
+   sky-blue version before it was rejected, and the mountain ridge before that.
+   Note this is dark ONLY at the very bottom: the mid-page dark .cta-band
+   sections were removed the same day and are not coming back (see PAGES in
+   CLAUDE.md). Don't read this footer as licence to reintroduce those.
+   White on #1E2A33 is 14.7:1, so unlike the sky version this ground takes light
+   text comfortably; the muted tones below still clear AA. */
+.site-footer{background:var(--graphite);color:#fff;padding:52px 0 46px;margin-top:0}
 .footer-inner{display:flex;flex-direction:column;gap:20px}
 .footer-brand{display:flex;align-items:center;gap:11px;font-family:"Space Grotesk",sans-serif;
-  font-weight:600;color:var(--graphite)}
-/* the wordmark's [AI] accent is Sky, which is invisible on a Sky ground */
-.site-footer .mark{color:var(--graphite)}
-.site-footer .mark span{color:#fff}
-.footer-note{color:var(--graphite);font-size:14.5px;max-width:560px}
+  font-weight:600;color:#fff}
+.site-footer .mark{color:#fff}
+.site-footer .mark span{color:var(--sky)}
+.footer-note{color:#A9B7C2;font-size:14.5px;max-width:560px}
 .footer-meta{display:flex;flex-wrap:wrap;align-items:center;gap:22px;
-  padding-top:18px;border-top:1px solid rgba(30,42,51,.22);
-  color:rgba(30,42,51,.96);font-size:13px}
+  padding-top:18px;border-top:1px solid rgba(255,255,255,.16);
+  color:#A9B7C2;font-size:13px}
 /* wrap: five links plus 20px gaps overflow a 320px viewport otherwise */
 .footer-nav{display:flex;flex-wrap:wrap;gap:12px 20px;margin-right:auto}
-/* hover is an underline, not a colour shift: every colour light enough to read
-   as "brighter" than graphite on this ground fails contrast */
-.footer-nav a{color:var(--graphite);transition:text-decoration-color .15s;
-  text-decoration:underline;text-decoration-color:transparent;text-underline-offset:4px}
-.footer-nav a:hover{text-decoration-color:currentColor}
+.footer-nav a{color:#C6D2DC;transition:color .15s}
+.footer-nav a:hover{color:#fff}
 
 /* ---------- pivot components (businesses + cohort #2) ---------- */
 
