@@ -219,18 +219,60 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
   max-width:920px;color:var(--graphite);
 }
 .statement em{color:var(--sky-dark);font-style:normal}
+/* centered statement band (about: "why we started") */
+.statement-band .statement{margin-inline:auto}
+.statement-band .statement-follow{max-width:680px;margin:22px auto 0}
 
-/* numbered pillars */
-.pillars{list-style:none}
-.pillars li{
-  display:grid;grid-template-columns:64px 1fr;gap:24px;
-  padding:30px 0;border-top:1px solid var(--line);
+/* flip cards (about: what we believe / where we are now).
+   HEIGHT: both faces sit in the SAME grid cell, so a card is as tall as its
+   taller face and the back paragraph can never clip at any width. min-height
+   is only a floor so a short front doesn't look cramped.
+   Without JS the grid never gets .flip-ready and the faces render stacked as
+   one static card, so the copy is always readable. */
+.flip-grid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.flip-grid > li{display:flex}
+.flip-card{
+  flex:1;display:flex;perspective:1100px;min-height:230px;
+  background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left;
+  cursor:pointer;border-radius:14px;
 }
-.pillars li:last-child{border-bottom:1px solid var(--line)}
-.pillars .num{font-family:"Space Grotesk",sans-serif;font-weight:600;
-  color:var(--sky);font-size:18px;padding-top:3px}
-.pillars h3{font-size:22px;font-weight:600;letter-spacing:-.01em;margin-bottom:7px}
-.pillars p{color:var(--muted);max-width:640px;font-size:16.5px}
+.flip-card:focus-visible{outline:3px solid rgba(92,156,224,.55);outline-offset:3px}
+.flip-inner{
+  flex:1;display:grid;position:relative;
+  transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.flip-card[aria-pressed="true"] .flip-inner{transform:rotateY(180deg)}
+.flip-face{
+  grid-area:1 / 1;display:flex;flex-direction:column;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;
+}
+.flip-num{font-family:"Space Grotesk",sans-serif;font-weight:600;color:var(--sky);
+  font-size:clamp(40px,4.5vw,54px);line-height:1;letter-spacing:-.02em}
+.flip-title{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:20px;
+  letter-spacing:-.01em;color:var(--graphite);margin-top:auto;padding-top:26px}
+.flip-hint{font-family:"Space Grotesk",sans-serif;font-size:11px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--faint);margin-top:8px}
+.flip-back{transform:rotateY(180deg);background:var(--mist);border-color:transparent}
+.flip-back-title{font-family:"Space Grotesk",sans-serif;font-weight:600;font-size:16px;
+  letter-spacing:-.01em;color:var(--graphite);margin-bottom:8px}
+.flip-body{color:var(--graphite);font-size:15px;line-height:1.6}
+.flip-grid:not(.flip-ready) .flip-inner{display:block;transform:none}
+.flip-grid:not(.flip-ready) .flip-face{backface-visibility:visible}
+.flip-grid:not(.flip-ready) .flip-front{border-radius:14px 14px 0 0;border-bottom:0}
+.flip-grid:not(.flip-ready) .flip-back{transform:none;border-radius:0 0 14px 14px;
+  border-color:var(--line);border-top:0}
+.flip-grid:not(.flip-ready) .flip-hint{display:none}
+/* reduced motion: crossfade the faces instead of rotating; the flip still works */
+@media (prefers-reduced-motion:reduce){
+  .flip-inner{transition:none}
+  .flip-card[aria-pressed="true"] .flip-inner{transform:none}
+  .flip-face{backface-visibility:visible;transition:opacity .25s ease}
+  .flip-back{transform:none;opacity:0}
+  .flip-card[aria-pressed="true"] .flip-back{opacity:1}
+  .flip-card[aria-pressed="true"] .flip-front{opacity:0}
+}
 
 /* who list */
 .who{display:grid;grid-template-columns:1.1fr 1fr;gap:54px;align-items:start}
@@ -245,6 +287,16 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
 .checks-2up{display:grid;grid-template-columns:1fr 1fr;gap:18px 44px;margin-top:34px}
 @media (max-width:760px){.checks-2up{grid-template-columns:1fr;gap:16px;margin-top:26px}}
 
+/* home: rigor proof cards. The check draws itself on reveal (see the .rc-tick
+   rules in the reveal section). Colors are hardcoded in the SVG because
+   presentation attributes cannot take var(), same as the hero scene. */
+.rigor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;text-align:left}
+.rigor-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px}
+.rigor-check{width:30px;height:30px;display:block}
+.rigor-card h3{font-family:"Space Grotesk",sans-serif;font-size:18px;font-weight:600;
+  letter-spacing:-.01em;margin:14px 0 6px}
+.rigor-card p{color:var(--muted);font-size:15px;line-height:1.55}
+
 /* centered section variant — centers kicker/head/lead (+ optional checks) */
 .section.center{text-align:center}
 .section.center .tracks-head,
@@ -254,6 +306,9 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
    get this, or it drops out of line with the heading). */
 .section.center .checks{max-width:600px;margin:26px auto 0;text-align:left}
 .section.center .hero-actions{justify-content:center}
+/* the timeline's nodes and connectors are anchored to each column's left edge,
+   so the step text stays left-aligned even when the band above it is centered */
+.section.center .steps{text-align:left}
 .section.compact{padding:46px 0}
 /* A band that ends in a list already carries its own bottom rhythm (the last row's
    line-height), so a full pad under it reads as a pool of empty tint. Pair the trimmed
@@ -348,7 +403,7 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
 .doc-link .tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:500}
 
 /* cta band */
-.cta-band{background:var(--graphite);color:#fff;padding:78px 0}
+.cta-band{background:var(--graphite);color:#fff;padding:78px 0;position:relative;overflow:hidden}
 .cta-band h2{font-family:"Space Grotesk",sans-serif;font-weight:600;
   font-size:clamp(28px,4vw,46px);letter-spacing:-.02em;line-height:1.1;max-width:760px}
 .cta-band p{color:#A9B7C2;margin-top:16px;max-width:560px}
@@ -358,6 +413,13 @@ h1,h2,h3,.brand,.brand-name,.eyebrow,.section-kicker,.nav a,.link-arrow,.btn{
 .cta-band .mark span{color:var(--sky)}
 .cta-band.center{text-align:center}
 .cta-band.center h2,.cta-band.center p{margin-left:auto;margin-right:auto}
+/* text-align does not move flex items, so a centered band still needs this or the
+   button hangs off the left edge under a centered heading */
+.cta-band.center .actions{justify-content:center}
+/* mountain silhouette on the band's floor, behind the copy */
+.cta-ridge{position:absolute;left:0;right:0;bottom:0;width:100%;
+  height:clamp(90px,15vw,170px);pointer-events:none}
+.cta-band .wrap{position:relative;z-index:1}
 
 /* ---------- form ---------- */
 .form-wrap{max-width:660px}
@@ -454,7 +516,12 @@ textarea[aria-invalid="true"]:focus{box-shadow:0 0 0 3px var(--alert-tint)}
 }
 
 /* ---------- footer ---------- */
-.site-footer{border-top:1px solid var(--line);padding:54px 0;margin-top:10px}
+.site-footer{border-top:1px solid var(--line);padding:30px 0 54px;margin-top:10px}
+/* the brand ridge, closing every page. A flow element (not pinned) so it can
+   never overlap the footer text, and width:100% (never 100vw) so it can never
+   cause horizontal overflow. */
+.footer-ridge{display:block;width:100%;height:clamp(44px,7vw,84px);
+  pointer-events:none;opacity:.5;margin-bottom:36px}
 .footer-inner{display:flex;flex-direction:column;gap:20px}
 .footer-brand{display:flex;align-items:center;gap:11px;font-family:"Space Grotesk",sans-serif;
   font-weight:600;color:var(--graphite)}
@@ -752,20 +819,26 @@ h1 .placeholder,h2 .placeholder,h3 .placeholder{margin-left:12px}
    so no-JS / reduced-motion visitors see everything normally with no flash. */
 
 /* cards carry their own transition so the hover lift and the reveal share it */
-.path-card,.feature-card,.stat-card,.price-card,.paper-card{
+.path-card,.feature-card,.stat-card,.price-card,.paper-card,.rigor-card{
   transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .3s ease,
              border-color .15s ease,opacity .5s ease;
 }
-.path-card:hover,.feature-card:hover,.stat-card:hover,.price-card:hover,.paper-card:hover{
+.path-card:hover,.feature-card:hover,.stat-card:hover,.price-card:hover,
+.paper-card:hover,.rigor-card:hover{
   transform:translateY(-5px);box-shadow:0 12px 30px rgba(30,42,51,.09);
 }
+/* the flip card lifts on its own wrapper: .flip-inner owns the rotate, so the
+   lift has to live on the button or the two transforms fight */
+.flip-card{transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.flip-card:hover{transform:translateY(-5px)}
 
 /* reveal — cards (transition inherited from the rule above) */
 html.anim .path-card,
 html.anim .feature-card,
 html.anim .stat-card,
 html.anim .price-card,
-html.anim .paper-card{opacity:0;transform:translateY(18px)}
+html.anim .paper-card,
+html.anim .rigor-card{opacity:0;transform:translateY(18px)}
 
 /* reveal — text / list / block elements.
    KEEP THE :where(). It holds this rule at `html.anim` specificity (0,1,1) so the .rv-in
@@ -788,6 +861,7 @@ html.anim :where(
   .step,
   .lens-strip li,
   .checks li,
+  .flip-grid > li,
   .callout,
   .reader
 ){
@@ -796,10 +870,32 @@ html.anim :where(
 }
 html.anim .rv-in{opacity:1;transform:none}
 
-/* numbered-step connector line draws in as the step reveals */
+/* numbered-step timeline: each node pops in from an outline ring, fills solid,
+   and its connector line chases it left to right. Sequenced per step with --d,
+   because reveal.js's inline transition-delay only reaches the .step itself and
+   cannot touch its children or its ::after; a custom property inherits to both.
+   The ring is an inset box-shadow, so it costs no layout and needs no fade-out. */
+html.anim .step{--d:0ms}
+html.anim .step:nth-child(2){--d:140ms}
+html.anim .step:nth-child(3){--d:280ms}
+html.anim .step:nth-child(4){--d:420ms}
+html.anim .step .step-node{
+  background:#fff;color:var(--sky);box-shadow:inset 0 0 0 2px var(--sky);
+  transform:scale(.6);
+  transition:transform .5s cubic-bezier(.34,1.56,.64,1) var(--d),
+             background-color .25s ease calc(var(--d) + .26s),
+             color .25s ease calc(var(--d) + .26s);
+}
+html.anim .step.rv-in .step-node{background:var(--sky);color:#fff;transform:none}
 html.anim .step::after{transform:scaleX(0);transform-origin:left;
-  transition:transform .55s cubic-bezier(.2,.7,.2,1) .15s}
+  transition:transform .55s cubic-bezier(.2,.7,.2,1) calc(var(--d) + .2s)}
 html.anim .step.rv-in::after{transform:scaleX(1)}
+
+/* rigor check draws itself once the card has landed (pathLength=1 in the SVG
+   normalizes the tick, so the dash math needs no measuring) */
+html.anim .rigor-card .rc-tick{stroke-dasharray:1;stroke-dashoffset:1;
+  transition:stroke-dashoffset .5s ease-out .4s}
+html.anim .rigor-card.rv-in .rc-tick{stroke-dashoffset:0}
 
 /* ---------- responsive ---------- */
 @media (max-width:960px){
@@ -836,7 +932,6 @@ html.anim .step.rv-in::after{transform:scaleX(1)}
   .section{padding:54px 0}
   .who{grid-template-columns:1fr;gap:30px}
   .form-row{grid-template-columns:1fr}
-  .pillars li{grid-template-columns:44px 1fr;gap:14px}
   .feature-grid.cols-2,.feature-grid.cols-3{grid-template-columns:1fr}
   .stat-grid{grid-template-columns:1fr}
   .price-grid{grid-template-columns:1fr}
@@ -850,4 +945,13 @@ html.anim .step.rv-in::after{transform:scaleX(1)}
 @media (max-width:380px){
   .nav{gap:12px 11px}
   .nav a{font-size:12px}
+}
+/* Mobile rules for the newer components. Deliberately its own top-level block:
+   nesting a query inside the 760px block above closes that block early and
+   orphans every rule after the insertion point into the narrower tier. */
+@media (max-width:760px){
+  .flip-grid{grid-template-columns:1fr;gap:14px}
+  .flip-card{min-height:170px}
+  .rigor-grid{grid-template-columns:1fr}
+  .footer-ridge{margin-bottom:26px}
 }

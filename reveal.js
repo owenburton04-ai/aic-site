@@ -59,6 +59,25 @@
     document.addEventListener('DOMContentLoaded', startHikers);
   } else { startHikers(); }
 
+  // About's flip cards. Sits above the motion gate below because the flip has to
+  // work under reduced motion too (there it crossfades instead of rotating).
+  // .flip-ready is the progressive-enhancement switch: without it the CSS renders
+  // both faces stacked, so a no-JS visitor still reads every card.
+  function initFlipCards() {
+    [].forEach.call(document.querySelectorAll('.flip-grid'), function (g) {
+      g.classList.add('flip-ready');
+    });
+    [].forEach.call(document.querySelectorAll('.flip-card'), function (btn) {
+      btn.addEventListener('click', function () {
+        btn.setAttribute('aria-pressed',
+          btn.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFlipCards);
+  } else { initFlipCards(); }
+
   if (!motion) return;                                    // reduced motion → no scroll reveal
   if (!('IntersectionObserver' in window)) {              // old browser → just show everything
     root.classList.remove('anim');
@@ -68,7 +87,7 @@
   var SEL = '.section-kicker,.tracks-head,.tracks-lead,.statement,.who h2,' +
     '.founders-figure,.founders-intro h2,.founders-intro p,.path-card,.feature-card,' +
     '.stat-card,.price-card,.brief-card,.paper-card,.step,.lens-strip li,.checks li,' +
-    '.callout,.reader';
+    '.flip-grid > li,.rigor-card,.callout,.reader';
 
   var keyCounter = 0;
 
