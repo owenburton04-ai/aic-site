@@ -87,7 +87,7 @@
   var SEL = '.section-kicker,.tracks-head,.tracks-lead,.statement,.who h2,' +
     '.founders-figure,.founders-intro h2,.founders-intro p,.path-card,.feature-card,' +
     '.stat-card,.price-card,.brief-card,.paper-card,.step,.lens-strip li,.checks li,' +
-    '.flip-grid > li,.rigor-card,.callout,.reader';
+    '.flip-grid > li,.rigor-card,.status-card,.callout,.reader';
 
   var keyCounter = 0;
 

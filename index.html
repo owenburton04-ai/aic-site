@@ -225,11 +225,6 @@
 
   <!-- CTA -->
   <section class="cta-band center">
-    <svg class="cta-ridge" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-      <path d="M0 320 L0 208 L180 120 L340 200 L520 84 L700 190 L880 110 L1060 210 L1240 130 L1440 220 L1440 320 Z" fill="rgba(255,255,255,.04)"/>
-      <path d="M0 320 L0 250 L220 160 L420 240 L640 140 L860 250 L1080 170 L1300 260 L1440 200 L1440 320 Z" fill="#16202A"/>
-      <path d="M0 250 L220 160 L420 240 L640 140 L860 250 L1080 170 L1300 260 L1440 200" fill="none" stroke="rgba(92,156,224,.22)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-    </svg>
     <div class="wrap">
       <h2>Start with a spark.</h2>
       <p>Bring us the corner of your business where AI feels most uncertain, and we'll tell you what to do first. Or join the cohort doing the work.</p>
@@ -243,11 +238,34 @@
 </main>
 
 <footer class="site-footer">
-  <svg class="footer-ridge" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-    <path d="M0 208 L180 120 L340 200 L520 84 L700 190 L880 110 L1060 210 L1240 130 L1440 220"
-          fill="none" stroke="#A9C9EC" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
-    <path d="M0 250 L220 160 L420 240 L640 140 L860 250 L1080 170 L1300 260 L1440 200"
-          fill="none" stroke="#5C9CE0" stroke-width="2" vector-effect="non-scaling-stroke" opacity=".65"/>
+  <svg class="footer-ridge" viewBox="0 0 1440 130" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="fr-far" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#DCE8F6"/><stop offset=".55" stop-color="#DCE8F6" stop-opacity=".85"/><stop offset="1" stop-color="#DCE8F6" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="fr-mid" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#B6D0EC"/><stop offset=".58" stop-color="#B6D0EC" stop-opacity=".8"/><stop offset="1" stop-color="#B6D0EC" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="fr-near" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#8FB6E0"/><stop offset=".6" stop-color="#8FB6E0" stop-opacity=".72"/><stop offset="1" stop-color="#8FB6E0" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <!-- far range: highest summits, softest tone -->
+    <path fill="url(#fr-far)" d="M0 90 L86 46 L128 66 L158 56 L232 96 L318 38 L362 68 L392 58 L466 98 L548 42 L594 72 L628 60 L706 100 L790 34 L836 66 L868 56 L948 98 L1032 44 L1078 74 L1110 62 L1190 102 L1272 40 L1318 70 L1352 60 L1440 96 L1440 130 L0 130 Z"/>
+    <!-- mid range -->
+    <path fill="url(#fr-mid)" d="M0 112 L54 80 L92 96 L120 88 L192 116 L262 62 L306 92 L338 80 L414 118 L490 68 L532 96 L566 84 L644 120 L716 58 L762 90 L794 78 L874 118 L950 66 L994 94 L1028 82 L1106 120 L1178 60 L1224 92 L1258 80 L1338 118 L1396 90 L1440 106 L1440 130 L0 130 Z"/>
+    <!-- snow caps: what actually makes them read as mountains at this height -->
+    <g fill="#FFFFFF" opacity=".92">
+      <path d="M241 78 L262 62 L275 71 L269 75 L262 70 L254 77 L247 74 Z"/>
+      <path d="M467 83 L490 68 L503 76 L497 80 L490 75 L482 82 L475 79 Z"/>
+      <path d="M694 77 L716 58 L730 68 L723 72 L716 67 L708 74 L701 71 Z"/>
+      <path d="M1156 78 L1178 60 L1192 70 L1186 74 L1178 69 L1170 76 L1163 73 Z"/>
+    </g>
+    <!-- crisp ridgeline over the mid summits: the definition Owen was missing -->
+    <path fill="none" stroke="#5C93CE" stroke-opacity=".7" stroke-width="1.5" vector-effect="non-scaling-stroke"
+          d="M0 112 L54 80 L92 96 L120 88 L192 116 L262 62 L306 92 L338 80 L414 118 L490 68 L532 96 L566 84 L644 120 L716 58 L762 90 L794 78 L874 118 L950 66 L994 94 L1028 82 L1106 120 L1178 60 L1224 92 L1258 80 L1338 118 L1396 90 L1440 106"/>
+    <!-- foreground foothills, darkest, grounding the range -->
+    <path fill="url(#fr-near)" d="M0 122 L70 104 L112 114 L168 100 L226 118 L300 98 L356 112 L420 102 L486 122 L556 100 L612 114 L676 104 L742 124 L812 102 L868 116 L932 104 L1000 124 L1070 100 L1126 114 L1190 104 L1256 124 L1326 102 L1382 116 L1440 108 L1440 130 L0 130 Z"/>
   </svg>
   <div class="wrap footer-inner">
     <div class="footer-brand">
